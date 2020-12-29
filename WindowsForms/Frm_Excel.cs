@@ -1188,6 +1188,7 @@ namespace WindowsForms
         /// <returns></returns>
         String[] fun(string filePath, int n, String[] str1, String[] str2, String[] arr3, string[] arr6, string[] arr7, string[] arr8, string[] arr9, string[] arr10, string[] arr11, string[] arr12, string[] arr13, string[] arr14, string[] arr15, string[] arr16, string[] Arr_1, string[] Arr_2, string[] Arr_3, string[] Arr_4, String[] str4)
         {
+
             try
             {
                 /*  Microsoft.Office.Interop.Excel.Application */
@@ -2285,9 +2286,7 @@ namespace WindowsForms
         //}
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            //  this.btn_getInputString.Click += new EventHandler(button1_Click);
-            // this.txt_KeJiaAModel.TextChanged += new EventHandler(txt_KeJiaAModel_TextChanged);
+        {      
             //设置Timer控件可用
             this.timer1.Enabled = true;
             //设置时间间隔（毫秒为单位）
@@ -2378,52 +2377,24 @@ namespace WindowsForms
         #region 触发，点击事件
 
         private void parameter1_MouseLeave(object sender, EventArgs e)
-        {
-            //if (label1.Text != "" && parameter1.Text != "")
-            //{
-            //    label1.Visible = true;
-            //    label1.Text = parameter1.Text;
-            //    parameter1.Visible = false;
-            //}
-            //else
-            //{
-            //    label1.Visible = false;
-            //    parameter1.Visible = true;
-            //}
-            //  UpdateClickMouseLeaveMessage(parameter1, label1);
+        {     
             UpdateClickMouseLeaveMessage(textBox17, parameter1, label1);
         }
         private void label1_Click(object sender, EventArgs e)
         {
-            //parameter1.Text = "";
-            //label1.Visible = false;
-            //parameter1.Visible = true;
-            // UpdateClickMessage(parameter1, label1);
+            
         }
 
 
         private void parameter2_MouseLeave(object sender, EventArgs e)
         {
-            //if (label2.Text != "" && parameter2.Text != "")
-            //{
-            //    label2.Visible = true;
-            //    label2.Text = parameter2.Text;
-            //    parameter2.Visible = false;
-            //}
-            //else
-            //{
-            //    label2.Visible = false;
-            //    parameter2.Visible = true;
-            //}
+            
             UpdateClickMouseLeaveMessage(parameter2, label2);
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-            //parameter2.Text = "";
-            //label2.Visible = false;
-            //parameter2.Visible = true;
-            //UpdateClickMessage(parameter2, label2);
+             
         }
         /// <summary>
         /// two
