@@ -2286,7 +2286,7 @@ namespace WindowsForms
         //}
 
         private void Form1_Load(object sender, EventArgs e)
-        {      
+        {
             //设置Timer控件可用
             this.timer1.Enabled = true;
             //设置时间间隔（毫秒为单位）
@@ -2377,24 +2377,24 @@ namespace WindowsForms
         #region 触发，点击事件
 
         private void parameter1_MouseLeave(object sender, EventArgs e)
-        {     
+        {
             UpdateClickMouseLeaveMessage(textBox17, parameter1, label1);
         }
         private void label1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
         private void parameter2_MouseLeave(object sender, EventArgs e)
         {
-            
+
             UpdateClickMouseLeaveMessage(parameter2, label2);
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-             
+
         }
         /// <summary>
         /// two
@@ -2422,7 +2422,8 @@ namespace WindowsForms
         /// <param name="label"></param>
         private void UpdateClickMouseLeaveMessage(System.Windows.Forms.TextBox gText, System.Windows.Forms.TextBox text, System.Windows.Forms.Label label)
         {
-            if (label.Text != "" && text.Text != "")
+            // textBox17, parameter1, label1
+            if (/*label.Text != "" && */text.Text != "")
             {
                 label.Visible = true;
                 label.Text = text.Text;
@@ -4367,10 +4368,9 @@ namespace WindowsForms
         }
         private void txt_KeJiaAModel_DoubleClick(object sender, EventArgs e)
         {
-
             IntoDataGriv(txt_KeJiaAModel, txt_KeJiaAModel);
 
-
+            //IntoDataGriv(txt_KeJiaAModel, txt_KeJiaAModel, txt_KeJiaAModel);
 
         }
         private void TimerEvent()
@@ -4434,6 +4434,21 @@ namespace WindowsForms
             else
             {
                 InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name);
+
+                inp.ShowDialog();
+                TimerEvent();
+            }
+
+        }
+        public void IntoDataGriv(TextBox box, TextBox textBox, TextBox textBox1)
+        {
+            if (box.Text == "")
+            {
+                box.Text = InputTextValue();
+            }
+            else
+            {
+                InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name, textBox1.Text);
 
                 inp.ShowDialog();
                 TimerEvent();

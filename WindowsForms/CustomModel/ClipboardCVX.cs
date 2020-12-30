@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace WindowsForms
 {
-    public class Product_Line
+    [Serializable]
+    public class ClipboardCVX
     {
-        public int Line_ID { get; set; }
-        public string Product_Line_Name { get; set; }
+        public string CValue { get; set; }
+        public string CMeaning { get; set; }
     }
 }

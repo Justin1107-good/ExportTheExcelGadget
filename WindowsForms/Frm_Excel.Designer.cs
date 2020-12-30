@@ -212,6 +212,7 @@ namespace WindowsForms
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -269,7 +270,7 @@ namespace WindowsForms
             this.groupBox1.Controls.Add(this.label65);
             this.groupBox1.Location = new System.Drawing.Point(46, 61);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1890, 189);
+            this.groupBox1.Size = new System.Drawing.Size(1866, 189);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "产品系列规则";
@@ -327,7 +328,7 @@ namespace WindowsForms
             this.panel6.Controls.Add(this.textBox17);
             this.panel6.Location = new System.Drawing.Point(8, 67);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1876, 144);
+            this.panel6.Size = new System.Drawing.Size(1858, 144);
             this.panel6.TabIndex = 25;
             // 
             // txt_groupFH_0
@@ -352,6 +353,7 @@ namespace WindowsForms
             this.textBox14.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox14.Location = new System.Drawing.Point(874, 59);
             this.textBox14.Name = "textBox14";
+            this.textBox14.ReadOnly = true;
             this.textBox14.Size = new System.Drawing.Size(105, 27);
             this.textBox14.TabIndex = 60;
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -364,6 +366,7 @@ namespace WindowsForms
             this.textBox13.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox13.Location = new System.Drawing.Point(1218, 15);
             this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
             this.textBox13.Size = new System.Drawing.Size(105, 27);
             this.textBox13.TabIndex = 59;
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -376,6 +379,7 @@ namespace WindowsForms
             this.textBox12.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox12.Location = new System.Drawing.Point(704, 59);
             this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
             this.textBox12.Size = new System.Drawing.Size(105, 27);
             this.textBox12.TabIndex = 58;
             this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -388,6 +392,7 @@ namespace WindowsForms
             this.textBox11.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox11.Location = new System.Drawing.Point(1046, 15);
             this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(105, 27);
             this.textBox11.TabIndex = 57;
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -400,6 +405,7 @@ namespace WindowsForms
             this.textBox10.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox10.Location = new System.Drawing.Point(532, 59);
             this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(105, 27);
             this.textBox10.TabIndex = 56;
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -412,6 +418,7 @@ namespace WindowsForms
             this.textBox9.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox9.Location = new System.Drawing.Point(360, 58);
             this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(105, 27);
             this.textBox9.TabIndex = 55;
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -424,6 +431,7 @@ namespace WindowsForms
             this.textBox8.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox8.Location = new System.Drawing.Point(188, 56);
             this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(105, 27);
             this.textBox8.TabIndex = 54;
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -436,6 +444,7 @@ namespace WindowsForms
             this.textBox7.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox7.Location = new System.Drawing.Point(1565, 16);
             this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(105, 27);
             this.textBox7.TabIndex = 53;
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -448,6 +457,7 @@ namespace WindowsForms
             this.textBox22.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox22.Location = new System.Drawing.Point(1567, 61);
             this.textBox22.Name = "textBox22";
+            this.textBox22.ReadOnly = true;
             this.textBox22.Size = new System.Drawing.Size(105, 27);
             this.textBox22.TabIndex = 52;
             this.textBox22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -460,6 +470,7 @@ namespace WindowsForms
             this.textBox4.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox4.Location = new System.Drawing.Point(1388, 15);
             this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(105, 27);
             this.textBox4.TabIndex = 52;
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -480,6 +491,7 @@ namespace WindowsForms
             this.textBox20.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox20.Location = new System.Drawing.Point(1388, 60);
             this.textBox20.Name = "textBox20";
+            this.textBox20.ReadOnly = true;
             this.textBox20.Size = new System.Drawing.Size(105, 27);
             this.textBox20.TabIndex = 52;
             this.textBox20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -492,6 +504,7 @@ namespace WindowsForms
             this.textBox18.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox18.Location = new System.Drawing.Point(1220, 59);
             this.textBox18.Name = "textBox18";
+            this.textBox18.ReadOnly = true;
             this.textBox18.Size = new System.Drawing.Size(105, 27);
             this.textBox18.TabIndex = 52;
             this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -544,6 +557,7 @@ namespace WindowsForms
             this.textBox2.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox2.Location = new System.Drawing.Point(1048, 59);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(105, 27);
             this.textBox2.TabIndex = 52;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -620,6 +634,7 @@ namespace WindowsForms
             this.txt_proList.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.txt_proList.Location = new System.Drawing.Point(19, 14);
             this.txt_proList.Name = "txt_proList";
+            this.txt_proList.ReadOnly = true;
             this.txt_proList.ShortcutsEnabled = false;
             this.txt_proList.Size = new System.Drawing.Size(100, 27);
             this.txt_proList.TabIndex = 40;
@@ -634,6 +649,7 @@ namespace WindowsForms
             this.textBox5.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox5.Location = new System.Drawing.Point(874, 15);
             this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(105, 27);
             this.textBox5.TabIndex = 35;
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -646,6 +662,7 @@ namespace WindowsForms
             this.textBox6.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox6.Location = new System.Drawing.Point(702, 15);
             this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(105, 27);
             this.textBox6.TabIndex = 34;
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -658,6 +675,7 @@ namespace WindowsForms
             this.textBox15.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox15.Location = new System.Drawing.Point(530, 15);
             this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(105, 27);
             this.textBox15.TabIndex = 36;
             this.textBox15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -677,6 +695,7 @@ namespace WindowsForms
             this.textBox16.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox16.Location = new System.Drawing.Point(357, 15);
             this.textBox16.Name = "textBox16";
+            this.textBox16.ReadOnly = true;
             this.textBox16.Size = new System.Drawing.Size(105, 27);
             this.textBox16.TabIndex = 38;
             this.textBox16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -697,6 +716,7 @@ namespace WindowsForms
             this.textBox17.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBox17.Location = new System.Drawing.Point(187, 14);
             this.textBox17.Name = "textBox17";
+            this.textBox17.ReadOnly = true;
             this.textBox17.Size = new System.Drawing.Size(105, 27);
             this.textBox17.TabIndex = 39;
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -725,7 +745,7 @@ namespace WindowsForms
             // 
             this.progressBar1.Location = new System.Drawing.Point(12, 178);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1760, 10);
+            this.progressBar1.Size = new System.Drawing.Size(1683, 10);
             this.progressBar1.TabIndex = 76;
             // 
             // label66
@@ -933,10 +953,11 @@ namespace WindowsForms
             // 
             // panel7
             // 
+            this.panel7.AutoScroll = true;
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1936, 260);
+            this.panel7.Size = new System.Drawing.Size(1924, 281);
             this.panel7.TabIndex = 82;
             // 
             // btn_getInputString
@@ -951,36 +972,36 @@ namespace WindowsForms
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btn_save);
+            this.panel2.Controls.Add(this.button2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 1045);
+            this.panel2.Location = new System.Drawing.Point(0, 1009);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1924, 10);
+            this.panel2.Size = new System.Drawing.Size(1924, 46);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.btn_getInputString);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 281);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(10, 764);
+            this.panel3.Size = new System.Drawing.Size(21, 728);
             this.panel3.TabIndex = 2;
             // 
             // panel4
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1914, 281);
+            this.panel4.Location = new System.Drawing.Point(1903, 281);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 764);
+            this.panel4.Size = new System.Drawing.Size(21, 728);
             this.panel4.TabIndex = 3;
             // 
             // panel5
             // 
             this.panel5.AutoScroll = true;
             this.panel5.AutoSize = true;
-            this.panel5.Controls.Add(this.btn_save);
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.chk_14);
             this.panel5.Controls.Add(this.chk_7);
             this.panel5.Controls.Add(this.chk_13);
@@ -999,7 +1020,6 @@ namespace WindowsForms
             this.panel5.Controls.Add(this.chk_8);
             this.panel5.Controls.Add(this.chk_2);
             this.panel5.Controls.Add(this.chk_1);
-            this.panel5.Controls.Add(this.button2);
             this.panel5.Controls.Add(this.parameter7);
             this.panel5.Controls.Add(this.parameter6);
             this.panel5.Controls.Add(this.parameter5);
@@ -1083,14 +1103,14 @@ namespace WindowsForms
             this.panel5.Controls.Add(this.txt_KeJiaAModel);
             this.panel5.Controls.Add(this.txt_ProductModel);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(10, 281);
+            this.panel5.Location = new System.Drawing.Point(21, 281);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1904, 764);
+            this.panel5.Size = new System.Drawing.Size(1882, 728);
             this.panel5.TabIndex = 4;
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(1689, 603);
+            this.btn_save.Location = new System.Drawing.Point(1577, 3);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(148, 40);
             this.btn_save.TabIndex = 76;
@@ -1103,9 +1123,9 @@ namespace WindowsForms
             this.chk_14.AutoSize = true;
             this.chk_14.Location = new System.Drawing.Point(1348, 344);
             this.chk_14.Name = "chk_14";
-            this.chk_14.Size = new System.Drawing.Size(89, 19);
+            this.chk_14.Size = new System.Drawing.Size(104, 19);
             this.chk_14.TabIndex = 75;
-            this.chk_14.Text = "参数选型";
+            this.chk_14.Text = "添加到描述";
             this.chk_14.UseVisualStyleBackColor = true;
             // 
             // chk_7
@@ -1115,9 +1135,9 @@ namespace WindowsForms
             this.chk_7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_7.Location = new System.Drawing.Point(590, 524);
             this.chk_7.Name = "chk_7";
-            this.chk_7.Size = new System.Drawing.Size(91, 24);
+            this.chk_7.Size = new System.Drawing.Size(106, 24);
             this.chk_7.TabIndex = 75;
-            this.chk_7.Text = "参数选型";
+            this.chk_7.Text = "添加到描述";
             this.chk_7.UseVisualStyleBackColor = false;
             // 
             // chk_13
@@ -1125,9 +1145,9 @@ namespace WindowsForms
             this.chk_13.AutoSize = true;
             this.chk_13.Location = new System.Drawing.Point(1348, 190);
             this.chk_13.Name = "chk_13";
-            this.chk_13.Size = new System.Drawing.Size(89, 19);
+            this.chk_13.Size = new System.Drawing.Size(104, 19);
             this.chk_13.TabIndex = 75;
-            this.chk_13.Text = "参数选型";
+            this.chk_13.Text = "添加到描述";
             this.chk_13.UseVisualStyleBackColor = true;
             // 
             // chk_6
@@ -1137,9 +1157,9 @@ namespace WindowsForms
             this.chk_6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_6.Location = new System.Drawing.Point(583, 344);
             this.chk_6.Name = "chk_6";
-            this.chk_6.Size = new System.Drawing.Size(91, 24);
+            this.chk_6.Size = new System.Drawing.Size(106, 24);
             this.chk_6.TabIndex = 75;
-            this.chk_6.Text = "参数选型";
+            this.chk_6.Text = "添加到描述";
             this.chk_6.UseVisualStyleBackColor = false;
             // 
             // chk_12
@@ -1147,9 +1167,9 @@ namespace WindowsForms
             this.chk_12.AutoSize = true;
             this.chk_12.Location = new System.Drawing.Point(943, 697);
             this.chk_12.Name = "chk_12";
-            this.chk_12.Size = new System.Drawing.Size(89, 19);
+            this.chk_12.Size = new System.Drawing.Size(104, 19);
             this.chk_12.TabIndex = 75;
-            this.chk_12.Text = "参数选型";
+            this.chk_12.Text = "添加到描述";
             this.chk_12.UseVisualStyleBackColor = true;
             // 
             // chk_5
@@ -1159,9 +1179,9 @@ namespace WindowsForms
             this.chk_5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_5.Location = new System.Drawing.Point(583, 186);
             this.chk_5.Name = "chk_5";
-            this.chk_5.Size = new System.Drawing.Size(91, 24);
+            this.chk_5.Size = new System.Drawing.Size(106, 24);
             this.chk_5.TabIndex = 75;
-            this.chk_5.Text = "参数选型";
+            this.chk_5.Text = "添加到描述";
             this.chk_5.UseVisualStyleBackColor = false;
             // 
             // chk_18
@@ -1169,9 +1189,9 @@ namespace WindowsForms
             this.chk_18.AutoSize = true;
             this.chk_18.Location = new System.Drawing.Point(1739, 344);
             this.chk_18.Name = "chk_18";
-            this.chk_18.Size = new System.Drawing.Size(89, 19);
+            this.chk_18.Size = new System.Drawing.Size(104, 19);
             this.chk_18.TabIndex = 75;
-            this.chk_18.Text = "参数选型";
+            this.chk_18.Text = "添加到描述";
             this.chk_18.UseVisualStyleBackColor = true;
             // 
             // chk_11
@@ -1179,9 +1199,9 @@ namespace WindowsForms
             this.chk_11.AutoSize = true;
             this.chk_11.Location = new System.Drawing.Point(951, 524);
             this.chk_11.Name = "chk_11";
-            this.chk_11.Size = new System.Drawing.Size(89, 19);
+            this.chk_11.Size = new System.Drawing.Size(104, 19);
             this.chk_11.TabIndex = 75;
-            this.chk_11.Text = "参数选型";
+            this.chk_11.Text = "添加到描述";
             this.chk_11.UseVisualStyleBackColor = true;
             // 
             // chk_17
@@ -1189,9 +1209,9 @@ namespace WindowsForms
             this.chk_17.AutoSize = true;
             this.chk_17.Location = new System.Drawing.Point(1739, 184);
             this.chk_17.Name = "chk_17";
-            this.chk_17.Size = new System.Drawing.Size(89, 19);
+            this.chk_17.Size = new System.Drawing.Size(104, 19);
             this.chk_17.TabIndex = 75;
-            this.chk_17.Text = "参数选型";
+            this.chk_17.Text = "添加到描述";
             this.chk_17.UseVisualStyleBackColor = true;
             // 
             // chk_10
@@ -1199,9 +1219,9 @@ namespace WindowsForms
             this.chk_10.AutoSize = true;
             this.chk_10.Location = new System.Drawing.Point(951, 347);
             this.chk_10.Name = "chk_10";
-            this.chk_10.Size = new System.Drawing.Size(89, 19);
+            this.chk_10.Size = new System.Drawing.Size(104, 19);
             this.chk_10.TabIndex = 75;
-            this.chk_10.Text = "参数选型";
+            this.chk_10.Text = "添加到描述";
             this.chk_10.UseVisualStyleBackColor = true;
             // 
             // chk_4
@@ -1211,9 +1231,9 @@ namespace WindowsForms
             this.chk_4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_4.Location = new System.Drawing.Point(222, 697);
             this.chk_4.Name = "chk_4";
-            this.chk_4.Size = new System.Drawing.Size(91, 24);
+            this.chk_4.Size = new System.Drawing.Size(106, 24);
             this.chk_4.TabIndex = 75;
-            this.chk_4.Text = "参数选型";
+            this.chk_4.Text = "添加到描述";
             this.chk_4.UseVisualStyleBackColor = false;
             // 
             // chk_16
@@ -1221,9 +1241,9 @@ namespace WindowsForms
             this.chk_16.AutoSize = true;
             this.chk_16.Location = new System.Drawing.Point(1348, 697);
             this.chk_16.Name = "chk_16";
-            this.chk_16.Size = new System.Drawing.Size(89, 19);
+            this.chk_16.Size = new System.Drawing.Size(104, 19);
             this.chk_16.TabIndex = 75;
-            this.chk_16.Text = "参数选型";
+            this.chk_16.Text = "添加到描述";
             this.chk_16.UseVisualStyleBackColor = true;
             // 
             // chk_9
@@ -1231,9 +1251,9 @@ namespace WindowsForms
             this.chk_9.AutoSize = true;
             this.chk_9.Location = new System.Drawing.Point(951, 184);
             this.chk_9.Name = "chk_9";
-            this.chk_9.Size = new System.Drawing.Size(89, 19);
+            this.chk_9.Size = new System.Drawing.Size(104, 19);
             this.chk_9.TabIndex = 75;
-            this.chk_9.Text = "参数选型";
+            this.chk_9.Text = "添加到描述";
             this.chk_9.UseVisualStyleBackColor = true;
             // 
             // chk_15
@@ -1241,9 +1261,9 @@ namespace WindowsForms
             this.chk_15.AutoSize = true;
             this.chk_15.Location = new System.Drawing.Point(1347, 521);
             this.chk_15.Name = "chk_15";
-            this.chk_15.Size = new System.Drawing.Size(89, 19);
+            this.chk_15.Size = new System.Drawing.Size(104, 19);
             this.chk_15.TabIndex = 75;
-            this.chk_15.Text = "参数选型";
+            this.chk_15.Text = "添加到描述";
             this.chk_15.UseVisualStyleBackColor = true;
             // 
             // chk_3
@@ -1253,9 +1273,9 @@ namespace WindowsForms
             this.chk_3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_3.Location = new System.Drawing.Point(222, 527);
             this.chk_3.Name = "chk_3";
-            this.chk_3.Size = new System.Drawing.Size(91, 24);
+            this.chk_3.Size = new System.Drawing.Size(106, 24);
             this.chk_3.TabIndex = 75;
-            this.chk_3.Text = "参数选型";
+            this.chk_3.Text = "添加到描述";
             this.chk_3.UseVisualStyleBackColor = false;
             // 
             // chk_8
@@ -1263,9 +1283,9 @@ namespace WindowsForms
             this.chk_8.AutoSize = true;
             this.chk_8.Location = new System.Drawing.Point(580, 697);
             this.chk_8.Name = "chk_8";
-            this.chk_8.Size = new System.Drawing.Size(89, 19);
+            this.chk_8.Size = new System.Drawing.Size(104, 19);
             this.chk_8.TabIndex = 75;
-            this.chk_8.Text = "参数选型";
+            this.chk_8.Text = "添加到描述";
             this.chk_8.UseVisualStyleBackColor = true;
             // 
             // chk_2
@@ -1275,9 +1295,9 @@ namespace WindowsForms
             this.chk_2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_2.Location = new System.Drawing.Point(222, 344);
             this.chk_2.Name = "chk_2";
-            this.chk_2.Size = new System.Drawing.Size(91, 24);
+            this.chk_2.Size = new System.Drawing.Size(106, 24);
             this.chk_2.TabIndex = 75;
-            this.chk_2.Text = "参数选型";
+            this.chk_2.Text = "添加到描述";
             this.chk_2.UseVisualStyleBackColor = false;
             // 
             // chk_1
@@ -1287,14 +1307,14 @@ namespace WindowsForms
             this.chk_1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chk_1.Location = new System.Drawing.Point(222, 187);
             this.chk_1.Name = "chk_1";
-            this.chk_1.Size = new System.Drawing.Size(91, 24);
+            this.chk_1.Size = new System.Drawing.Size(106, 24);
             this.chk_1.TabIndex = 75;
-            this.chk_1.Text = "参数选型";
+            this.chk_1.Text = "添加到描述";
             this.chk_1.UseVisualStyleBackColor = false;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1690, 670);
+            this.button2.Location = new System.Drawing.Point(1749, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(147, 40);
             this.button2.TabIndex = 4;
@@ -2244,6 +2264,7 @@ namespace WindowsForms
             this.groupBox1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
