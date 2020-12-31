@@ -130,7 +130,7 @@ namespace WindowsForms
                 grid_Prame.Rows[0].Visible = false;
                 BindingSource bs = new BindingSource();
                 bs.DataSource = dous;
-                grid_Prame.DataSource = dous;
+                grid_Prame.DataSource = bs;
             }
             else
             {
@@ -138,7 +138,9 @@ namespace WindowsForms
                 BindingSource bs = new BindingSource();
                 bs.AllowNew = true;
                 bs.DataSource = dous;
-                grid_Prame.DataSource = dous;
+                grid_Prame.DataSource = bs;
+
+
                 // grid_Prame.Rows[0].Visible = true;
             }
         }
