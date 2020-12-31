@@ -3377,25 +3377,25 @@ namespace WindowsForms
         private void txt_Arr_1_DoubleClick(object sender, EventArgs e)
         {
             //txt_Arr_1.Text = InputTextValue();
-            IntoDataGriv(txt_Arr_1, txt_Arr_1);
+            IntoDataGriv(txt_Arr_1, txt_Arr_1, parameter15.Text);
         }
 
         private void txt_Arr_2_DoubleClick(object sender, EventArgs e)
         {
             // txt_Arr_2.Text = InputTextValue();
-            IntoDataGriv(txt_Arr_2, txt_Arr_2);
+            IntoDataGriv(txt_Arr_2, txt_Arr_2, parameter16.Text);
         }
 
         private void txt_Arr_3_DoubleClick(object sender, EventArgs e)
         {
             //txt_Arr_3.Text = InputTextValue();
-            IntoDataGriv(txt_Arr_3, txt_Arr_3);
+            IntoDataGriv(txt_Arr_3, txt_Arr_3, parameter17.Text);
         }
 
         private void txt_Arr_4_DoubleClick(object sender, EventArgs e)
         {
             // txt_Arr_4.Text = InputTextValue();
-            IntoDataGriv(txt_Arr_4, txt_Arr_4);
+            IntoDataGriv(txt_Arr_4, txt_Arr_4, parameter18.Text);
         }
         private void Frm_Excel_ResizeEnd(object sender, EventArgs e)
         {
@@ -4368,9 +4368,9 @@ namespace WindowsForms
         }
         private void txt_KeJiaAModel_DoubleClick(object sender, EventArgs e)
         {
-            IntoDataGriv(txt_KeJiaAModel, txt_KeJiaAModel);
-
-            //IntoDataGriv(txt_KeJiaAModel, txt_KeJiaAModel, txt_KeJiaAModel);
+            // IntoDataGriv(txt_KeJiaAModel, txt_KeJiaAModel);
+            //  UseTextBoxValue.Text_String = txt_KeJiaAModel.Text;
+            IntoDataGriv(txt_KeJiaAModel, txt_KeJiaAModel, parameter1.Text);
 
         }
         private void TimerEvent()
@@ -4429,6 +4429,7 @@ namespace WindowsForms
         {
             if (box.Text == "")
             {
+
                 box.Text = InputTextValue();
             }
             else
@@ -4440,15 +4441,16 @@ namespace WindowsForms
             }
 
         }
-        public void IntoDataGriv(TextBox box, TextBox textBox, TextBox textBox1)
+        public void IntoDataGriv(TextBox box, TextBox textBox, string txtString)
         {
             if (box.Text == "")
             {
+                UseTextBoxValue.Text_String = txtString;
                 box.Text = InputTextValue();
             }
             else
             {
-                InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name, textBox1.Text);
+                InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name);
 
                 inp.ShowDialog();
                 TimerEvent();
@@ -4457,7 +4459,7 @@ namespace WindowsForms
         }
         private void txt_JSModel_DoubleClick(object sender, EventArgs e)
         {
-            IntoDataGriv(txt_JSModel, txt_JSModel);
+            IntoDataGriv(txt_JSModel, txt_JSModel, parameter2.Text);
             // IntoDataGriv(txt_JSModel);
             //if (txt_JSModel.Text == "")
             //{
@@ -4473,72 +4475,72 @@ namespace WindowsForms
         private void txt_ProductModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_ProductModel.Text = InputTextValue();
-            IntoDataGriv(txt_ProductModel, txt_ProductModel);
+            IntoDataGriv(txt_ProductModel, txt_ProductModel, parameter3.Text);
         }
 
         private void txt_FourJTypeModel_DoubleClick(object sender, EventArgs e)
         {
             // this.txt_FourJTypeModel.Text = InputTextValue();
-            IntoDataGriv(txt_FourJTypeModel, txt_FourJTypeModel);
+            IntoDataGriv(txt_FourJTypeModel, txt_FourJTypeModel, parameter4.Text);
         }
 
         private void txt_KuoZhanFangshiModel_DoubleClick(object sender, EventArgs e)
         {
             // this.txt_KuoZhanFangshiModel.Text = InputTextValue();
-            IntoDataGriv(txt_KuoZhanFangshiModel, txt_KuoZhanFangshiModel);
+            IntoDataGriv(txt_KuoZhanFangshiModel, txt_KuoZhanFangshiModel, parameter5.Text);
         }
 
         private void txt_AnZhuangFangshiModel_DoubleClick(object sender, EventArgs e)
         {
             // this.txt_AnZhuangFangshiModel.Text = InputTextValue();
-            IntoDataGriv(txt_AnZhuangFangshiModel, txt_AnZhuangFangshiModel);
+            IntoDataGriv(txt_AnZhuangFangshiModel, txt_AnZhuangFangshiModel, parameter6.Text);
         }
         private void txt_GongHuoFangshiModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_GongHuoFangshiModel.Text = InputTextValue();
-            IntoDataGriv(txt_GongHuoFangshiModel, txt_GongHuoFangshiModel);
+            IntoDataGriv(txt_GongHuoFangshiModel, txt_GongHuoFangshiModel, parameter7.Text);
         }
 
         private void txt_FenDuanNengLiModel_DoubleClick(object sender, EventArgs e)
         {
             //  this.txt_FenDuanNengLiModel.Text = InputTextValue();
-            IntoDataGriv(txt_FenDuanNengLiModel, txt_FenDuanNengLiModel);
+            IntoDataGriv(txt_FenDuanNengLiModel, txt_FenDuanNengLiModel, parameter8.Text);
         }
 
         private void txt_TuoGouFangshiModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_TuoGouFangshiModel.Text = InputTextValue();
-            IntoDataGriv(txt_TuoGouFangshiModel, txt_TuoGouFangshiModel);
+            IntoDataGriv(txt_TuoGouFangshiModel, txt_TuoGouFangshiModel, parameter9.Text);
         }
 
         private void txt_BaoHuTypeModel_DoubleClick(object sender, EventArgs e)
         {
             // this.txt_BaoHuTypeModel.Text = InputTextValue();
-            IntoDataGriv(txt_BaoHuTypeModel, txt_BaoHuTypeModel);
+            IntoDataGriv(txt_BaoHuTypeModel, txt_BaoHuTypeModel, parameter10.Text);
         }
 
         private void txt_CaoZuoFangshiModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_CaoZuoFangshiModel.Text = InputTextValue();
-            IntoDataGriv(txt_CaoZuoFangshiModel, txt_CaoZuoFangshiModel);
+            IntoDataGriv(txt_CaoZuoFangshiModel, txt_CaoZuoFangshiModel, parameter11.Text);
         }
 
         private void txt_ShengyuAModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_ShengyuAModel.Text = InputTextValue();
-            IntoDataGriv(txt_ShengyuAModel, txt_ShengyuAModel);
+            IntoDataGriv(txt_ShengyuAModel, txt_ShengyuAModel, parameter12.Text);
         }
 
         private void txt_EDingAModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_EDingAModel.Text = InputTextValue();
-            IntoDataGriv(txt_EDingAModel, txt_EDingAModel);
+            IntoDataGriv(txt_EDingAModel, txt_EDingAModel, parameter13.Text);
         }
 
         private void txt_YanShiTimeModel_DoubleClick(object sender, EventArgs e)
         {
             //this.txt_YanShiTimeModel.Text = InputTextValue();
-            IntoDataGriv(txt_YanShiTimeModel, txt_YanShiTimeModel);
+            IntoDataGriv(txt_YanShiTimeModel, txt_YanShiTimeModel, parameter14.Text);
         }
 
         private void button1_Click(object sender, EventArgs e)

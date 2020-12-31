@@ -35,14 +35,15 @@ namespace WindowsForms
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.grid_Prame = new System.Windows.Forms.DataGridView();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ConString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox_Search = new System.Windows.Forms.GroupBox();
             this.dgv_List = new System.Windows.Forms.DataGridView();
             this.LCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CConString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ConString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_Prame)).BeginInit();
             this.groupBox_Search.SuspendLayout();
@@ -123,8 +124,25 @@ namespace WindowsForms
             this.grid_Prame.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.grid_Prame_KeyPress);
             this.grid_Prame.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grid_Prame_KeyUp);
             // 
+            // Code
+            // 
+            this.Code.DataPropertyName = "Code";
+            this.Code.HeaderText = "值";
+            this.Code.MinimumWidth = 6;
+            this.Code.Name = "Code";
+            this.Code.Width = 125;
+            // 
+            // ConString
+            // 
+            this.ConString.DataPropertyName = "ConString";
+            this.ConString.HeaderText = "含义";
+            this.ConString.MinimumWidth = 6;
+            this.ConString.Name = "ConString";
+            this.ConString.Width = 125;
+            // 
             // groupBox_Search
             // 
+            this.groupBox_Search.Controls.Add(this.button1);
             this.groupBox_Search.Controls.Add(this.dgv_List);
             this.groupBox_Search.Location = new System.Drawing.Point(654, 23);
             this.groupBox_Search.Name = "groupBox_Search";
@@ -132,6 +150,7 @@ namespace WindowsForms
             this.groupBox_Search.TabIndex = 11;
             this.groupBox_Search.TabStop = false;
             this.groupBox_Search.Text = "groupBox2";
+            this.groupBox_Search.TextChanged += new System.EventHandler(this.groupBox_Search_TextChanged);
             // 
             // dgv_List
             // 
@@ -139,11 +158,11 @@ namespace WindowsForms
             this.dgv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LCode,
             this.CConString});
-            this.dgv_List.Location = new System.Drawing.Point(7, 35);
+            this.dgv_List.Location = new System.Drawing.Point(7, 24);
             this.dgv_List.Name = "dgv_List";
             this.dgv_List.RowHeadersWidth = 51;
             this.dgv_List.RowTemplate.Height = 27;
-            this.dgv_List.Size = new System.Drawing.Size(468, 581);
+            this.dgv_List.Size = new System.Drawing.Size(468, 604);
             this.dgv_List.TabIndex = 0;
             this.dgv_List.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_List_KeyUp);
             // 
@@ -183,21 +202,18 @@ namespace WindowsForms
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "输入";
             // 
-            // Code
+            // button1
             // 
-            this.Code.DataPropertyName = "Code";
-            this.Code.HeaderText = "值";
-            this.Code.MinimumWidth = 6;
-            this.Code.Name = "Code";
-            this.Code.Width = 125;
-            // 
-            // ConString
-            // 
-            this.ConString.DataPropertyName = "ConString";
-            this.ConString.HeaderText = "含义";
-            this.ConString.MinimumWidth = 6;
-            this.ConString.Name = "ConString";
-            this.ConString.Width = 125;
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.Red;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(5, 5);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // InputDialogForm
             // 
@@ -245,5 +261,6 @@ namespace WindowsForms
         private System.Windows.Forms.DataGridViewTextBoxColumn CConString;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConString;
+        private System.Windows.Forms.Button button1;
     }
 }

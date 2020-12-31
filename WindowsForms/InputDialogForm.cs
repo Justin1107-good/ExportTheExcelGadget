@@ -18,7 +18,6 @@ namespace WindowsForms
         public delegate void TextEventHandler(string strText);
         public List<DouCustom> dous;
         public string strString = "";
-        public string strText = "";
         public string strBarcodeList = "";//设置一个字符串接受分割开的每一个字符 
         System.Timers.Timer t = new System.Timers.Timer(1 * 0.5 * 0.5 * 1000);
 
@@ -40,15 +39,10 @@ namespace WindowsForms
             InitializeComponent();
             this.dous = _dous;
             this.strString = _strString;
+            groupBox_Search.Text = UseTextBoxValue.Text_String;
+
         }
-        public InputDialogForm(List<DouCustom> _dous, string _strString, string _strText)
-        {     //事件调用线程错误捕获
-            Control.CheckForIllegalCrossThreadCalls = false;
-            InitializeComponent();
-            this.dous = _dous;
-            this.strString = _strString;
-            this.strText = _strText;
-        }
+
         public TextEventHandler TextHandler;
 
 
@@ -118,8 +112,14 @@ namespace WindowsForms
 
         private void InputDialogForm_Load(object sender, EventArgs e)
         {
+            dgv_List.ReadOnly = true;
+            if (UseTextBoxValue.Text_String != "")
+            {
+                TimerEvent();
+            }
+
             label4.Text = "一、参数代号不可以填写重复值";
-            label2.Text = "二、无代号，缺省用”0“表示；\n不带附件用“ - ”表示；无附件用“00”表示";
+            label2.Text = "二、无代号，缺省用”0“表示；\n\n不带附件用“ - ”表示；无附件用“00”表示";
             // As.controllInitializeSize(this);
             if (dous == null)
             {
@@ -136,9 +136,10 @@ namespace WindowsForms
             {
 
                 BindingSource bs = new BindingSource();
+                bs.AllowNew = true;
                 bs.DataSource = dous;
                 grid_Prame.DataSource = dous;
-                grid_Prame.Rows[0].Visible = true;
+                // grid_Prame.Rows[0].Visible = true;
             }
         }
 
@@ -147,7 +148,6 @@ namespace WindowsForms
             //调用类的自适应方法，完成自适应
             //  As.controlAutoSize(this);
         }
-
         private void dgv_List_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Modifiers.CompareTo(Keys.Control) == 0 && e.KeyCode == Keys.C)
@@ -187,7 +187,7 @@ namespace WindowsForms
             //    string[] arrText = CreatAllArry(Clipboard.GetText());//检索与指定格式相关联的数据
             //    for (int i = 0; i < arrText.Length; i++)
             //    {
-            //        //  this.grid_Prame.Rows[i].Cells[0].Value = arrText[i].Substring(0, arrText[i].IndexOf('&'));
+            //        //this.grid_Prame.Rows[i].Cells[0].Value = arrText[i].Substring(0, arrText[i].IndexOf('&'));
             //        this.grid_Prame.Rows[i].Cells[1].Value = arrText[i].Substring(arrText[i].IndexOf('&') + 1);
             //    }
             //    //IDataObject iData = Clipboard.GetDataObject();
@@ -276,6 +276,7 @@ namespace WindowsForms
                     clipboardText = clipboardText.Substring(clipboardText.IndexOf("\n") + 1);
                 }
                 clipboardText = Clipboard.GetText();
+
                 int cellsCount = grid_Prame.SelectedCells.Count;
                 int r1 = (grid_Prame.SelectedCells[cellsCount - 1].RowIndex);
                 int r2 = (grid_Prame.SelectedCells[0].RowIndex);
@@ -292,13 +293,19 @@ namespace WindowsForms
                 }
                 else
                 {
+
                     for (int i = 0; i <= rownum; i++)
                     {
+
                         for (int j = 0; j <= colnum; j++)
                         {
 
                             grid_Prame.Rows[i + r1].Cells[j + c1].Value = data[i, j];
+                            //增加行
+                            grid_Prame.Rows.Add();
+
                         }
+
                     }
                 }
             }
@@ -309,5 +316,40 @@ namespace WindowsForms
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (UseTextBoxValue.Text_String == "")
+            {
+                groupBox_Search.Text = "条件不存在";
+            }
+            else
+            {
+                groupBox_Search.Text = UseTextBoxValue.Text_String;
+                if (groupBox_Search.Text != "")
+                {
+
+                    //dgv_List.DataSource = douCustoms;
+                }
+
+            }
+        }
+
+        private void groupBox_Search_TextChanged(object sender, EventArgs e)
+        {
+
+
+        }
+        private void TimerEvent()
+        {
+            t.Elapsed += new System.Timers.ElapsedEventHandler(timeup);
+            t.Enabled = true;
+        }
+        private void timeup(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            //调用点击事件
+            this.button1.PerformClick();
+            //点击事件调用结束后停止计时
+            t.Stop();
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace WindowsForms
     {
         public static string BoxText { get; set; }
         public static string text_Name { get; set; }
+        public static string Text_String { get; set; }
     }
 }
