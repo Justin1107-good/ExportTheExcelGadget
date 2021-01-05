@@ -33,7 +33,6 @@ namespace WindowsForms
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BTN_GETxml = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label36 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -96,16 +95,18 @@ namespace WindowsForms
             this.label65 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.txt_productName = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.BTN_GETxml = new System.Windows.Forms.Button();
+            this.label43 = new System.Windows.Forms.Label();
+            this.txt_productName = new System.Windows.Forms.TextBox();
             this.btn_getInputString = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btn_save = new System.Windows.Forms.Button();
             this.chk_14 = new System.Windows.Forms.CheckBox();
             this.chk_7 = new System.Windows.Forms.CheckBox();
             this.chk_13 = new System.Windows.Forms.CheckBox();
@@ -124,7 +125,6 @@ namespace WindowsForms
             this.chk_8 = new System.Windows.Forms.CheckBox();
             this.chk_2 = new System.Windows.Forms.CheckBox();
             this.chk_1 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.parameter7 = new System.Windows.Forms.TextBox();
             this.parameter6 = new System.Windows.Forms.TextBox();
             this.parameter5 = new System.Windows.Forms.TextBox();
@@ -212,6 +212,7 @@ namespace WindowsForms
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -220,29 +221,16 @@ namespace WindowsForms
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.BTN_GETxml);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.label35);
             this.panel1.Controls.Add(this.label34);
-            this.panel1.Controls.Add(this.txt_productName);
             this.panel1.Controls.Add(this.label33);
-            this.panel1.Controls.Add(this.label43);
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1924, 281);
             this.panel1.TabIndex = 0;
-            // 
-            // BTN_GETxml
-            // 
-            this.BTN_GETxml.Location = new System.Drawing.Point(342, 14);
-            this.BTN_GETxml.Name = "BTN_GETxml";
-            this.BTN_GETxml.Size = new System.Drawing.Size(98, 31);
-            this.BTN_GETxml.TabIndex = 31;
-            this.BTN_GETxml.Text = "获取XML";
-            this.BTN_GETxml.UseVisualStyleBackColor = true;
-            this.BTN_GETxml.Click += new System.EventHandler(this.BTN_GETxml_Click);
             // 
             // groupBox1
             // 
@@ -268,9 +256,9 @@ namespace WindowsForms
             this.groupBox1.Controls.Add(this.label67);
             this.groupBox1.Controls.Add(this.label40);
             this.groupBox1.Controls.Add(this.label65);
-            this.groupBox1.Location = new System.Drawing.Point(46, 61);
+            this.groupBox1.Location = new System.Drawing.Point(31, 61);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1866, 189);
+            this.groupBox1.Size = new System.Drawing.Size(1881, 189);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "产品系列规则";
@@ -921,16 +909,6 @@ namespace WindowsForms
             this.label34.TabIndex = 26;
             this.label34.Text = "label34";
             // 
-            // txt_productName
-            // 
-            this.txt_productName.Location = new System.Drawing.Point(138, 16);
-            this.txt_productName.Name = "txt_productName";
-            this.txt_productName.Size = new System.Drawing.Size(198, 25);
-            this.txt_productName.TabIndex = 22;
-            this.txt_productName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_productName.TextChanged += new System.EventHandler(this.txt_productName_TextChanged);
-            this.txt_productName.DoubleClick += new System.EventHandler(this.txt_productName_DoubleClick);
-            // 
             // label33
             // 
             this.label33.AutoSize = true;
@@ -941,24 +919,47 @@ namespace WindowsForms
             this.label33.TabIndex = 24;
             this.label33.Text = "数据导出提示";
             // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label43.Location = new System.Drawing.Point(42, 16);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(69, 20);
-            this.label43.TabIndex = 21;
-            this.label43.Text = "产品系列";
-            // 
             // panel7
             // 
             this.panel7.AutoScroll = true;
+            this.panel7.Controls.Add(this.BTN_GETxml);
+            this.panel7.Controls.Add(this.label43);
+            this.panel7.Controls.Add(this.txt_productName);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1924, 281);
             this.panel7.TabIndex = 82;
+            // 
+            // BTN_GETxml
+            // 
+            this.BTN_GETxml.Location = new System.Drawing.Point(329, 18);
+            this.BTN_GETxml.Name = "BTN_GETxml";
+            this.BTN_GETxml.Size = new System.Drawing.Size(98, 31);
+            this.BTN_GETxml.TabIndex = 31;
+            this.BTN_GETxml.Text = "获取XML";
+            this.BTN_GETxml.UseVisualStyleBackColor = true;
+            this.BTN_GETxml.Click += new System.EventHandler(this.BTN_GETxml_Click);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label43.Location = new System.Drawing.Point(37, 19);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(69, 20);
+            this.label43.TabIndex = 21;
+            this.label43.Text = "产品系列";
+            // 
+            // txt_productName
+            // 
+            this.txt_productName.Location = new System.Drawing.Point(116, 19);
+            this.txt_productName.Name = "txt_productName";
+            this.txt_productName.Size = new System.Drawing.Size(198, 25);
+            this.txt_productName.TabIndex = 22;
+            this.txt_productName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_productName.TextChanged += new System.EventHandler(this.txt_productName_TextChanged);
+            this.txt_productName.DoubleClick += new System.EventHandler(this.txt_productName_DoubleClick);
             // 
             // btn_getInputString
             // 
@@ -979,6 +980,26 @@ namespace WindowsForms
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1924, 46);
             this.panel2.TabIndex = 1;
+            // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(1577, 3);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(148, 40);
+            this.btn_save.TabIndex = 76;
+            this.btn_save.Text = "保存配方";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1749, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 40);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "导出";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel3
             // 
@@ -1107,16 +1128,6 @@ namespace WindowsForms
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1882, 728);
             this.panel5.TabIndex = 4;
-            // 
-            // btn_save
-            // 
-            this.btn_save.Location = new System.Drawing.Point(1577, 3);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(148, 40);
-            this.btn_save.TabIndex = 76;
-            this.btn_save.Text = "保存配方";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // chk_14
             // 
@@ -1311,16 +1322,6 @@ namespace WindowsForms
             this.chk_1.TabIndex = 75;
             this.chk_1.Text = "添加到描述";
             this.chk_1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1749, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 40);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "导出";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // parameter7
             // 
@@ -1881,7 +1882,7 @@ namespace WindowsForms
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(1216, 389);
+            this.label58.Location = new System.Drawing.Point(1206, 391);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(47, 15);
             this.label58.TabIndex = 51;
@@ -2215,6 +2216,7 @@ namespace WindowsForms
             this.txt_KeJiaAModel.Size = new System.Drawing.Size(129, 124);
             this.txt_KeJiaAModel.TabIndex = 35;
             this.txt_KeJiaAModel.Click += new System.EventHandler(this.txt_KeJiaAModel_Click);
+           
             this.txt_KeJiaAModel.TextChanged += new System.EventHandler(this.txt_KeJiaAModel_TextChanged);
             this.txt_KeJiaAModel.DoubleClick += new System.EventHandler(this.txt_KeJiaAModel_DoubleClick);
             this.txt_KeJiaAModel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeJiaAModel_KeyUp);
@@ -2264,6 +2266,8 @@ namespace WindowsForms
             this.groupBox1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);

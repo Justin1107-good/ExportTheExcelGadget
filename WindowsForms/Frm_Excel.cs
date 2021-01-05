@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -23,6 +24,9 @@ namespace WindowsForms
 
     public partial class Frm_Excel : Form
     {
+        /// <summary>
+        /// 双缓冲
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
@@ -70,8 +74,11 @@ namespace WindowsForms
         string filePath = "";
         public string GetUpdate = "";
         private string IsDeleteData = "";
+        private int countSelectFileName = 0;
         StringBuilder sb = new StringBuilder();
-        System.Timers.Timer t = new System.Timers.Timer(1 * 0.5 * 0.5 * 1000);
+        string[] array = null;
+        System.Timers.Timer timer = new System.Timers.Timer(1 * 0.5 * 0.5 * 1000);
+
         //static string currpath = System.Windows.Forms.Application.StartupPath;     
         public Frm_Excel()
         {
@@ -141,39 +148,67 @@ namespace WindowsForms
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            bool falg = false;
+            //导出事件函数调用
+            Button2_Fun(falg);
+
+        }
+        /// <summary>
+        /// 导出事件函数
+        /// </summary>
+        /// <param name="flag"></param>
+        private void Button2_Fun(bool flag)
+        {
             //开始计时
             this.timer1.Start();
             //CreateXML(XMLfile);
             label33.Visible = true;
             label35.Visible = true;
-            string product_Name = txt_productName.Text.ToUpper();
-            //塑壳断路器及漏电塑壳断路器
+            string product_Name = txt_productName.Text;
 
-            if (string.IsNullOrEmpty(product_Name))
+            if (flag == true)
             {
-                System.Windows.Forms.MessageBox.Show("产品名称不可以为空", "提示", MessageBoxButtons.OK, MessageBoxIcon.None);
-                return;
-            }
-            column.Column_Name = txt_productName.Text;
-            columns.Add(column);
-            SaveFileDialog SaveFile = new SaveFileDialog();
-            SaveFile.FileName = txt_productName.Text;
-            SaveFile.Filter = "Microsoft Excel 工作表(*.xls)|*.xlsx|所有文件(*.*)|*.*";//EXCEL|*.xlsx|*.xls|EPLAN|*.elk|所有文件类型|*.*
-            SaveFile.RestoreDirectory = true;
-            if (SaveFile.ShowDialog() == DialogResult.OK)
-            {
-                filePath = SaveFile.FileName;
-                //txt_productName.Text = System.IO.Path.GetFileName(filePath);
+                string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                path = path + "ExportExcel/";
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                CommonButton2ClickData(path, flag);
             }
             else
             {
-                return;
+                if (string.IsNullOrEmpty(product_Name))
+                {
+                    System.Windows.Forms.MessageBox.Show("产品名称不可以为空", "提示", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    return;
+                }
+                column.Column_Name = txt_productName.Text;
+                columns.Add(column);
+                SaveFileDialog SaveFile = new SaveFileDialog();
+                SaveFile.FileName = txt_productName.Text;
+                SaveFile.Title = "请选择文件夹";
+                SaveFile.Filter = "Microsoft Excel 工作表(*.xls)|*.xlsx|所有文件(*.*)|*.*";//EXCEL|*.xlsx|*.xls|EPLAN|*.elk|所有文件类型|*.*
+                SaveFile.RestoreDirectory = true;
+                if (SaveFile.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = SaveFile.FileName;
+                    //txt_productName.Text = System.IO.Path.GetFileName(filePath);
+                }
+                else
+                {
+                    return;
+                }
+                CommonButton2ClickData(filePath, flag);
             }
-
-            CommonButton2ClickData(filePath);
-            //ThreadNewButtonClick(filePath);
         }
-        private void CommonButton2ClickData(string filePath)
+        /// <summary>
+        /// 获取导出叔
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="flag"></param>
+        private void CommonButton2ClickData(string filePath, bool flag)
         {
             try
             {
@@ -879,7 +914,7 @@ namespace WindowsForms
                 }
                 #endregion
 
-                ThreadNewButtonClick(filePath, KJArr, JSArr, PMArr, FTArr, KZArr, AZArr, GHFSArr, FDNLArr, TgfsArr, BHFSArr, CZArr, SAArr, EDAArr, YSTArr, Arr_1, Arr_2, Arr_3, Arr_4);
+                ThreadNewButtonClick(filePath, flag, KJArr, JSArr, PMArr, FTArr, KZArr, AZArr, GHFSArr, FDNLArr, TgfsArr, BHFSArr, CZArr, SAArr, EDAArr, YSTArr, Arr_1, Arr_2, Arr_3, Arr_4);
 
 
             }
@@ -890,7 +925,7 @@ namespace WindowsForms
             }
         }
 
-        private void ThreadNewButtonClick(string filePath, String[] KJArr, String[] JSArr, String[] PMArr, String[] FTArr, String[] KZArr, String[] AZArr, String[] GHFSArr, String[] FDNLArr, String[] TgfsArr, String[] BHFSArr, String[] CZArr, String[] SAArr, String[] EDAArr, String[] YSTArr, String[] Arr_1, String[] Arr_2, String[] Arr_3, String[] Arr_4)
+        private void ThreadNewButtonClick(string filePath, bool falg, String[] KJArr, String[] JSArr, String[] PMArr, String[] FTArr, String[] KZArr, String[] AZArr, String[] GHFSArr, String[] FDNLArr, String[] TgfsArr, String[] BHFSArr, String[] CZArr, String[] SAArr, String[] EDAArr, String[] YSTArr, String[] Arr_1, String[] Arr_2, String[] Arr_3, String[] Arr_4)
         {
             try
             {
@@ -958,7 +993,7 @@ namespace WindowsForms
                     }
                 }
                 //,FTArr,KZArr,AZArr, GHFSArr,FDNLArr,TgfsArr,BHFSArr,CZArr,SAArr,EDAAr,YSTArr.Length;  
-                OutPutResult(filePath, n, KJArr, JSArr, PMArr, FTArr, KZArr, AZArr, GHFSArr, FDNLArr, TgfsArr, BHFSArr, CZArr, SAArr, EDAArr, YSTArr, Arr_1, Arr_2, Arr_3, Arr_4, str4);
+                OutPutResult(filePath, falg, n, KJArr, JSArr, PMArr, FTArr, KZArr, AZArr, GHFSArr, FDNLArr, TgfsArr, BHFSArr, CZArr, SAArr, EDAArr, YSTArr, Arr_1, Arr_2, Arr_3, Arr_4, str4);
 
             }
             catch (Exception err)
@@ -972,6 +1007,8 @@ namespace WindowsForms
         /// </summary>
         private void ReadDataXml(string dataXmlPath)
         {
+
+            #region MyRegion   
             string strArr_1 = "";
             string strArr_2 = "";
             string strArr_3 = "";
@@ -990,7 +1027,7 @@ namespace WindowsForms
             string strArr_16 = "";
             string strArr_17 = "";
             string strArr_18 = "";
-            //   string dataXmlPath = subpath + "" + txt_productName.Text.ToUpper() + ".xml";
+            // string dataXmlPath = subpath + "" + txt_productName.Text.ToUpper() + ".xml";
             if (dataXmlPath != null)
             {
 
@@ -1018,35 +1055,7 @@ namespace WindowsForms
                     parameter17.Text = cm.parameter17;
                     parameter18.Text = cm.parameter18;
                     txt_KeJiaAModel.Text = GetXmlText(cm.strArrString1, strArr_1, txt_KeJiaAModel);
-                    #region TEST
 
-
-                    //if (cm.strArrString1.Length > 0)
-                    //{
-                    //    for (int i = 0; i < cm.strArrString1.Length; i++)
-                    //    {
-                    //        strArr_1 += '\n' + cm.strArrString1[i] + '\r';
-                    //    }
-                    //    txt_KeJiaAModel.Text = strArr_1;
-                    //}
-                    //else
-                    //{
-                    //    txt_KeJiaAModel.Text = strArr_1;
-                    //}
-                    //txt_JSModel.Text = cm.strArrString2;
-                    //if (cm.strArrString2.Length > 0)
-                    //{
-                    //    for (int i = 0; i < cm.strArrString2.Length; i++)
-                    //    {
-                    //        strArr_2 += '\n' + cm.strArrString2[i] + '\r';
-                    //    }
-                    //    txt_JSModel.Text = strArr_2;
-                    //}
-                    //else
-                    //{
-                    //    txt_JSModel.Text = strArr_2;
-                    //}
-                    #endregion
                     txt_JSModel.Text = GetXmlText(cm.strArrString2, strArr_2, txt_JSModel);
                     txt_ProductModel.Text = GetXmlText(cm.strArrString3, strArr_3, txt_ProductModel); //cm.strArrString3;
                     txt_FourJTypeModel.Text = GetXmlText(cm.strArrString4, strArr_4, txt_FourJTypeModel); // cm.strArrString4;
@@ -1064,19 +1073,14 @@ namespace WindowsForms
                     txt_Arr_2.Text = GetXmlText(cm.strArrString16, strArr_16, txt_Arr_2); // cm.strArrString16;
                     txt_Arr_3.Text = GetXmlText(cm.strArrString17, strArr_17, txt_Arr_3); // cm.strArrString17;
                     txt_Arr_4.Text = GetXmlText(cm.strArrString18, strArr_18, txt_Arr_4); // cm.strArrString18;
-                }
 
+                }
             }
-            try
-            {
-            }
-            catch
-            {
-                //add some code here
-            }
+            #endregion
         }
         private String GetXmlText(string[] strArr, string strString, System.Windows.Forms.TextBox textBox)
         {
+
             if (strArr == null)
             {
                 strArr = new string[] { };
@@ -1095,6 +1099,7 @@ namespace WindowsForms
                 textBox.Text = strString;
             }
             return textBox.Text;
+
         }
         private String[] CreatAllArry(string strArr)
         {
@@ -1170,11 +1175,11 @@ namespace WindowsForms
         /// <param name="arr1">数组1</param>
         /// <param name="arr2">数组2</param>
         /// <param name="str4">数组1和数组2组成的n个数量的新数组</param>
-        public void OutPutResult(string filePath, int n, string[] arr1, string[] arr2, string[] arr3, string[] arr6, string[] arr7, string[] arr8, string[] arr9, string[] arr10, string[] arr11, string[] arr12, string[] arr13, string[] arr14, string[] arr15, string[] arr16, string[] Arr_1, string[] Arr_2, string[] Arr_3, string[] Arr_4, String[] str4)
+        public void OutPutResult(string filePath, bool flag, int n, string[] arr1, string[] arr2, string[] arr3, string[] arr6, string[] arr7, string[] arr8, string[] arr9, string[] arr10, string[] arr11, string[] arr12, string[] arr13, string[] arr14, string[] arr15, string[] arr16, string[] Arr_1, string[] Arr_2, string[] Arr_3, string[] Arr_4, String[] str4)
         {
             //arr6,arr7,arr8,arr9,arr10,arr11, arr12,arr13,arr14,arr15, arr16,
 
-            String[] str5 = fun(filePath, n, arr1, arr2, arr3, arr6, arr7, arr8, arr9, arr10, arr11, arr12, arr13, arr14, arr15, arr16, Arr_1, Arr_2, Arr_3, Arr_4, str4);
+            String[] str5 = fun(filePath, flag, n, arr1, arr2, arr3, arr6, arr7, arr8, arr9, arr10, arr11, arr12, arr13, arr14, arr15, arr16, Arr_1, Arr_2, Arr_3, Arr_4, str4);
 
             // long totalCount = str5.Count();
 
@@ -1186,7 +1191,7 @@ namespace WindowsForms
         /// <param name="str1"></param>
         /// <param name="str2"></param>
         /// <returns></returns>
-        String[] fun(string filePath, int n, String[] str1, String[] str2, String[] arr3, string[] arr6, string[] arr7, string[] arr8, string[] arr9, string[] arr10, string[] arr11, string[] arr12, string[] arr13, string[] arr14, string[] arr15, string[] arr16, string[] Arr_1, string[] Arr_2, string[] Arr_3, string[] Arr_4, String[] str4)
+        String[] fun(string filePath, bool flag, int n, String[] str1, String[] str2, String[] arr3, string[] arr6, string[] arr7, string[] arr8, string[] arr9, string[] arr10, string[] arr11, string[] arr12, string[] arr13, string[] arr14, string[] arr15, string[] arr16, string[] Arr_1, string[] Arr_2, string[] Arr_3, string[] Arr_4, String[] str4)
         {
 
             try
@@ -1288,7 +1293,7 @@ namespace WindowsForms
                                                                                         //}
                                                                                         //else
                                                                                         //{
-                                                                                        #endregion       
+                                                                                        #endregion
                                                                                         str4[m] = txt_productName.Text + groups[0] + (str1[i].Equals(0) ? "" : str1[i]) + groups[1] + (str2[k].Equals(0) ? "" : str2[k]) + groups[2] + (arr3[l].Equals(0) ? "" : arr3[l]) + groups[3] + (arr6[ft].Equals(0) ? "" : arr6[ft]) + groups[4] + (arr7[kz].Equals(0) ? "" : arr7[kz]) + groups[5] + (arr8[az].Equals(0) ? "" : arr8[az]) + groups[6] + (arr9[gh].Equals(0) ? "" : arr9[gh]) + groups[7] + (arr10[fdn].Equals(0) ? "" : arr10[fdn]) + groups[8] + (arr11[tg].Equals(0) ? "" : arr11[tg]) + groups[9] + (arr12[bh].Equals(0) ? "" : arr12[bh]) + groups[10] + (arr13[cz].Equals(0) ? "" : arr13[cz]) + groups[11] + (arr14[sa].Equals(0) ? "" : arr14[sa]) + groups[12] + (arr15[ed].Equals(0) ? "" : arr15[ed]) + groups[13] + (arr16[ts].Equals(0) ? "" : arr16[ts]) + groups[14] + (Arr_1[a_1].Equals(0) ? "" : Arr_1[a_1]) + groups[15] + (Arr_2[a_2].Equals(0) ? "" : Arr_2[a_2]) + groups[16] + (Arr_3[a_3].Equals(0) ? "" : Arr_3[a_3]) + groups[17] + (Arr_4[a_4].Equals(0) ? "" : Arr_4[a_4]);
 
                                                                                         excel.Cells[rowIndex, 1] = str4[m];
@@ -2189,29 +2194,63 @@ namespace WindowsForms
                         }
                     }
                 }
-                workSheet.Protect("skycore!");
-                //workSheet.Protect("skycore!", SheetProtectionType.None);
-                wBook.SaveAs(filePath/* + workSheet.Name + ".xlsx"*/,
-                Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
-                Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, Missing.Value, Missing.Value, Missing.Value,
-                Missing.Value, Missing.Value);
+                //加密excel
+                // workSheet.Protect("skycore!");
 
-                wBook = null;
-                excel.Quit();   //必须关闭，才能有效结束
-                excel = null;
-                label34.Visible = true;
+                if (flag == true)
+                {
+                    wBook.SaveAs(filePath + txt_productName.Text + ".xlsx"/* + workSheet.Name + ".xlsx"*/,
+             Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+             Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, Missing.Value, Missing.Value, Missing.Value,
+             Missing.Value, Missing.Value);
+                    wBook = null;
+                    excel.Quit();   //必须关闭，才能有效结束
+                    excel = null;
+                    label34.Visible = true;
+                    this.timer1.Stop();
+                    label34.Text = "耗时：" + (DateTime.Now - startTime).ToString();
+                    WriteSQLLog(txt_productName.Text, label34.Text);
+                    for (int i = 0; i < countSelectFileName; i++)
+                    {
+                        if (i == countSelectFileName)
+                        {
+                            //语音提示
+                            System.Threading.Thread t = new System.Threading.Thread(PlayWarnSoundSuccess);//创建了线程
+                            t.Start();//开启线程
+                            MessageBox.Show("EXCEL文件导出成功", "提示", MessageBoxButtons.OK);
+                            t.Abort();
+                        }
 
-                //System.Windows.Forms.MessageBox.Show("导出数据成功!", "系统信息");
-                this.timer1.Stop();
-                label34.Text = "耗时：" + (DateTime.Now - startTime).ToString();
-                //语音提示
-                System.Threading.Thread t = new System.Threading.Thread(PlayWarnSoundSuccess);//创建了线程
-                t.Start();//开启线程
-                MessageBox.Show("EXCEL文件导出成功", "提示", MessageBoxButtons.OK);
-                t.Abort();
-                groups.Clear();
-                arrModels.Clear();
-                columns.Clear();
+                    }
+                    timer.Stop();
+                    groups.Clear();
+                    arrModels.Clear();
+                    columns.Clear();
+                }
+                else
+                {
+                    wBook.SaveAs(filePath/* + workSheet.Name + ".xlsx"*/,
+           Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+           Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, Missing.Value, Missing.Value, Missing.Value,
+           Missing.Value, Missing.Value);
+                    wBook = null;
+                    excel.Quit();   //必须关闭，才能有效结束
+                    excel = null;
+                    label34.Visible = true;
+                    this.timer1.Stop();
+                    label34.Text = "耗时：" + (DateTime.Now - startTime).ToString();
+                    //语音提示
+                    System.Threading.Thread t = new System.Threading.Thread(PlayWarnSoundSuccess);//创建了线程
+                    t.Start();//开启线程
+                    MessageBox.Show("EXCEL文件导出成功", "提示", MessageBoxButtons.OK);
+
+                    WriteSQLLog(txt_productName.Text, label34.Text);
+                    timer.Stop();
+                    t.Abort();
+                    groups.Clear();
+                    arrModels.Clear();
+                    columns.Clear();
+                }
                 //主界面刷新
                 //this.Hide(); //先隐藏主窗体   
                 //Frm_Excel form1 = new Frm_Excel(); //重新实例化此窗体 
@@ -2234,6 +2273,7 @@ namespace WindowsForms
                 groups.Clear();
                 arrModels.Clear();
                 columns.Clear();
+
                 System.Windows.Forms.MessageBox.Show("错误原因：" + err.Message, "提示信息",
                      MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -2261,6 +2301,33 @@ namespace WindowsForms
 
             return str4;
         }
+        /// <summary>
+        /// 日志记录
+        /// </summary>
+        /// <param name="strExp"></param>
+        public void WriteSQLLog(string strExp, string timeString)
+        {
+            try
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                path = path + "Export/";
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                FileStream fs = new FileStream(path + "Export_log.log", FileMode.Append);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write("[" + DateTime.Now.ToString("yyy-MM-dd HH:mm:ss") + "]" + strExp + "...............\tsuccess" + "\t" + timeString + "\r\n");
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+                return;
+            }
+        }
         private static void PlayWarnSoundSuccess(object obj)
         {
             using (SpeechSynthesizer speech = new SpeechSynthesizer())
@@ -2287,6 +2354,7 @@ namespace WindowsForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ConvertTxtToDataSet();
             //设置Timer控件可用
             this.timer1.Enabled = true;
             //设置时间间隔（毫秒为单位）
@@ -2706,13 +2774,13 @@ namespace WindowsForms
 
         private void S_TextChanged(System.Windows.Forms.TextBox pText, System.Windows.Forms.TextBox gText)
         {
-            pText.Text = gText.Text.ToUpper();
+            pText.Text = gText.Text;
         }
         //, System.Windows.Forms.Label label
         private void S_TextChanged(System.Windows.Forms.TextBox pText, System.Windows.Forms.TextBox gText, System.Windows.Forms.Label label)
         {
-            pText.Text = gText.Text.ToUpper();
-            label.Text = gText.Text.ToUpper();
+            pText.Text = gText.Text;
+            label.Text = gText.Text;
         }
         //private void TextClick(System.Windows.Forms.TextBox gText)
         //{
@@ -2720,8 +2788,8 @@ namespace WindowsForms
         //}
         private void TextClick(System.Windows.Forms.TextBox pText, System.Windows.Forms.TextBox gText, System.Windows.Forms.Label label)
         {
-            pText.Text = gText.Text.ToUpper();
-            label.Text = gText.Text.ToUpper();
+            pText.Text = gText.Text;
+            label.Text = gText.Text;
         }
         #region 更改text值时触发事件
 
@@ -4227,7 +4295,7 @@ namespace WindowsForms
                 arrModels.Clear();
                 columns.Clear();
 
-                #endregion    
+                #endregion
 
             }
             catch (Exception ex)
@@ -4268,29 +4336,193 @@ namespace WindowsForms
         #endregion
         private void BTN_GETxml_Click(object sender, EventArgs e)
         {
+            BTN_GetXml();
+            #region MyRegion  
+
+            //OpenFileDialog dialog = new OpenFileDialog();
+            //dialog.Multiselect = true;//该值确定是否可以选择多个文件
+            //dialog.Title = "请选择文件夹";
+            //dialog.Filter = "(.xml) | *.xml";
+
+            //if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    // string file = dialog.FileName;
+            //    //if (System.IO.Path.GetFileName(file).Substring(System.IO.Path.GetFileName(file).IndexOf('.') + 1).ToString() == "xml")
+            //    //{
+            //    foreach (string files in dialog.FileNames)
+            //    {
+            //        txt_productName.Text = System.IO.Path.GetFileName(System.IO.Path.GetFileName(files).Substring(0, System.IO.Path.GetFileName(files).IndexOf('.')));
+            //        //System.Windows.Forms.MessageBox.Show(file);
+            //        ReadDataXml(files);
+            //        //StreamReader sr = new StreamReader(files);
+
+            //        //string line;
+            //        //while ((line = sr.ReadLine()) != null)
+            //        //{
+            //        //    //在此处添加需要对文件中每一行数据进行处理的代码
+            //        //    txt_productName.Text = System.IO.Path.GetFileName(System.IO.Path.GetFileName(files).Substring(0, System.IO.Path.GetFileName(files).IndexOf('.')));
+            //        //    //System.Windows.Forms.MessageBox.Show(file);
+            //        //    ReadDataXml(files);
+
+
+            //        //}
+            //        //  sr.Close();
+            //        //   MessageBox.Show(txt_productName.Text);
+            //    }
+
+            //    //}
+            //    //else
+            //    //{
+            //    //    System.Windows.Forms.MessageBox.Show("您所选择的文件名必须为(.xml)格式");
+            //    //    return;
+            //    //}
+
+            //}
+            #endregion
+        }
+        #region eexprotexcel event
+
+        private void BTN_GetXml()
+        {
+            bool flag = true;
+
 
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = false;//该值确定是否可以选择多个文件
+            dialog.Multiselect = true;
             dialog.Title = "请选择文件夹";
             dialog.Filter = "(.xml) | *.xml";
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string file = dialog.FileName;
-                if (System.IO.Path.GetFileName(file).Substring(System.IO.Path.GetFileName(file).IndexOf('.') + 1).ToString() == "xml")
+                countSelectFileName = dialog.FileNames.Length;
+                //txt_productName.Text = System.IO.Path.GetFileName(System.IO.Path.GetFileName(dialog.FileName).Substring(0, System.IO.Path.GetFileName(dialog.FileName).IndexOf('.')));
+                if (countSelectFileName == 1)
                 {
-                    txt_productName.Text = System.IO.Path.GetFileName(System.IO.Path.GetFileName(file).Substring(0, System.IO.Path.GetFileName(file).IndexOf('.')));
-                    //System.Windows.Forms.MessageBox.Show(file);
-                    ReadDataXml(file);
+                    txt_productName.Text = System.IO.Path.GetFileName(System.IO.Path.GetFileName(dialog.FileName).Substring(0, System.IO.Path.GetFileName(dialog.FileName).IndexOf('.')));
+                    ReadDataXml(dialog.FileName);
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("您所选择的文件名必须为(.xml)格式");
-                    return;
+
+                    flag = true;
+                    foreach (string files in dialog.FileNames)
+                    {
+
+                        txt_productName.Text = System.IO.Path.GetFileName(System.IO.Path.GetFileName(files).Substring(0, System.IO.Path.GetFileName(files).IndexOf('.')));
+                        #region test
+                        #region MyRegion   
+                        string strArr_1 = "";
+                        string strArr_2 = "";
+                        string strArr_3 = "";
+                        string strArr_4 = "";
+                        string strArr_5 = "";
+                        string strArr_6 = "";
+                        string strArr_7 = "";
+                        string strArr_8 = "";
+                        string strArr_9 = "";
+                        string strArr_10 = "";
+                        string strArr_11 = "";
+                        string strArr_12 = "";
+                        string strArr_13 = "";
+                        string strArr_14 = "";
+                        string strArr_15 = "";
+                        string strArr_16 = "";
+                        string strArr_17 = "";
+                        string strArr_18 = "";
+                        //   string dataXmlPath = subpath + "" + txt_productName.Text.ToUpper() + ".xml";
+                        if (files != null)
+                        {
+                            StreamReader sr = new StreamReader(files);
+                            string line;
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                //在此处添加需要对文件中每一行数据进行处理的代码   
+                                XmlSerializer serializer = new XmlSerializer(typeof(ColumnModel));
+                                ColumnModel cm = (ColumnModel)serializer.Deserialize(sr);
+                                //txt_productName.Text = cm.Column_Name;
+                                parameter1.Text = cm.parameter1;
+                                parameter2.Text = cm.parameter2;
+                                parameter3.Text = cm.parameter3;
+                                parameter4.Text = cm.parameter4;
+                                parameter5.Text = cm.parameter5;
+                                parameter6.Text = cm.parameter6;
+                                parameter7.Text = cm.parameter7;
+                                parameter8.Text = cm.parameter8;
+                                parameter9.Text = cm.parameter9;
+                                parameter10.Text = cm.parameter10;
+                                parameter11.Text = cm.parameter11;
+                                parameter12.Text = cm.parameter12;
+                                parameter13.Text = cm.parameter13;
+                                parameter14.Text = cm.parameter14;
+                                parameter15.Text = cm.parameter15;
+                                parameter16.Text = cm.parameter16;
+                                parameter17.Text = cm.parameter17;
+                                parameter18.Text = cm.parameter18;
+                                txt_KeJiaAModel.Text = GetXmlText(cm.strArrString1, strArr_1, txt_KeJiaAModel);
+
+                                txt_JSModel.Text = GetXmlText(cm.strArrString2, strArr_2, txt_JSModel);
+                                txt_ProductModel.Text = GetXmlText(cm.strArrString3, strArr_3, txt_ProductModel); //cm.strArrString3;
+                                txt_FourJTypeModel.Text = GetXmlText(cm.strArrString4, strArr_4, txt_FourJTypeModel); // cm.strArrString4;
+                                txt_KuoZhanFangshiModel.Text = GetXmlText(cm.strArrString5, strArr_5, txt_KuoZhanFangshiModel); // cm.strArrString5;
+                                txt_AnZhuangFangshiModel.Text = GetXmlText(cm.strArrString6, strArr_6, txt_AnZhuangFangshiModel); // cm.strArrString6;
+                                txt_GongHuoFangshiModel.Text = GetXmlText(cm.strArrString7, strArr_7, txt_GongHuoFangshiModel); // cm.strArrString7;
+                                txt_FenDuanNengLiModel.Text = GetXmlText(cm.strArrString8, strArr_8, txt_FenDuanNengLiModel); // cm.strArrString8;
+                                txt_TuoGouFangshiModel.Text = GetXmlText(cm.strArrString9, strArr_9, txt_TuoGouFangshiModel); // cm.strArrString9;
+                                txt_BaoHuTypeModel.Text = GetXmlText(cm.strArrString10, strArr_10, txt_BaoHuTypeModel); //cm.strArrString10;
+                                txt_CaoZuoFangshiModel.Text = GetXmlText(cm.strArrString11, strArr_11, txt_CaoZuoFangshiModel); // cm.strArrString11;
+                                txt_ShengyuAModel.Text = GetXmlText(cm.strArrString12, strArr_12, txt_ShengyuAModel); // cm.strArrString12;
+                                txt_EDingAModel.Text = GetXmlText(cm.strArrString13, strArr_13, txt_EDingAModel); // cm.strArrString13;
+                                txt_YanShiTimeModel.Text = GetXmlText(cm.strArrString14, strArr_14, txt_YanShiTimeModel); // cm.strArrString14;
+                                txt_Arr_1.Text = GetXmlText(cm.strArrString15, strArr_15, txt_Arr_1); // cm.strArrString15;
+                                txt_Arr_2.Text = GetXmlText(cm.strArrString16, strArr_16, txt_Arr_2); // cm.strArrString16;
+                                txt_Arr_3.Text = GetXmlText(cm.strArrString17, strArr_17, txt_Arr_3); // cm.strArrString17;
+                                txt_Arr_4.Text = GetXmlText(cm.strArrString18, strArr_18, txt_Arr_4); // cm.strArrString18;
+                                                                                                      //ETimerEvent();
+                                Button2_Fun(flag);
+                            }
+
+                            sr.Close();
+                        }
+                        #endregion
+                        #endregion
+                        //count++;
+                        //if (count == countSelectFileName)
+                        //{
+
+                        //}
+                        //else
+                        //{
+
+                        //}
+                    }
+                    //语音提示
+                    System.Threading.Thread t = new System.Threading.Thread(PlayWarnSoundSuccess);//创建了线程
+                    t.Start();//开启线程
+                    MessageBox.Show("EXCEL文件批量导出成功", "提示", MessageBoxButtons.OK);
+                    t.Abort();
                 }
 
             }
+
+
+
+
+
+
+            Debug.WriteLine(dialog.FileNames);
         }
+
+        private void ETimerEvent()
+        {
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(Etimeup);
+            timer.Enabled = true;
+        }
+        private void Etimeup(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            this.button2.PerformClick();
+
+        }
+        #endregion
         /// <summary>
         /// doing
         /// </summary>
@@ -4375,13 +4607,13 @@ namespace WindowsForms
         }
         private void TimerEvent()
         {
-            t.Elapsed += new System.Timers.ElapsedEventHandler(timeup);
-            t.Enabled = true;
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(timeup);
+            timer.Enabled = true;
         }
         private void timeup(object sender, System.Timers.ElapsedEventArgs e)
         {
             this.btn_getInputString.PerformClick();
-            t.Stop();
+            timer.Stop();
         }
         private void txt_Arr_1_Click(object sender, EventArgs e)
         {
@@ -4402,7 +4634,6 @@ namespace WindowsForms
         {
             //txt_Arr_4.Text = InputTextValue();
         }
-
 
         #region 内存回收
 
@@ -4425,35 +4656,82 @@ namespace WindowsForms
             currentCount += 1;
             SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
         }
-        public void IntoDataGriv(TextBox box, TextBox textBox)
-        {
-            if (box.Text == "")
-            {
 
-                box.Text = InputTextValue();
-            }
-            else
-            {
-                InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name);
-
-                inp.ShowDialog();
-                TimerEvent();
-            }
-
-        }
         public void IntoDataGriv(TextBox box, TextBox textBox, string txtString)
         {
-            if (box.Text == "")
+            try
             {
-                UseTextBoxValue.Text_String = txtString;
-                box.Text = InputTextValue();
+                if (box.Text == "")
+                {
+                    ConvertTxtToDataSet();
+                    UseTextBoxValue.Text_String = txtString;
+
+                    box.Text = InputTextValue();
+                }
+                else
+                {
+
+
+                    InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name);
+                    inp.ShowDialog();
+                    TimerEvent();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                return;
+                // System.Windows.Forms.MessageBox.Show(ex.StackTrace);
+            }
+            finally
+            {
+
+            }
+
+
+        }
+
+        private void ConvertTxtToDataSet()
+        {
+            string ReadLine;
+
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "//XmlComListData//";
+            //  path = path + serchName;
+            //string strLocalPath = System.Windows.Forms.Application.StartupPath + "//XmlComListData//";  
+            //  string strLocalPath = "../Debug" + "//XmlComListData//";
+            string serchName = "ConBox_list.txt";
+
+            string fullName = path + "\\" + serchName;
+            if (!File.Exists(fullName))
+            {
+                MessageBox.Show("您要加载的数据文件不存在，请重试！");
+                return;
             }
             else
             {
-                InputDialogForm inp = new InputDialogForm(GetDictionaryToList(box.Text), textBox.Name);
+                //  string Path = @"..//"+UseTextBoxValue.Text_String+"";
 
-                inp.ShowDialog();
-                TimerEvent();
+                StreamReader reader = new StreamReader(fullName,
+                                      System.Text.Encoding.GetEncoding("GB2312"));
+                while (reader.Peek() >= 0)
+                {
+                    try
+                    {
+                        ReadLine = reader.ReadLine();
+                        array = ReadLine.Split('\n');
+                        if (array.Length == 0)
+                        {
+                            MessageBox.Show("您选择的导入数据类型有误，请重试！");
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+
+                }
+
             }
 
         }
@@ -4607,8 +4885,6 @@ namespace WindowsForms
 
 
         }
-
-
 
 
     }
