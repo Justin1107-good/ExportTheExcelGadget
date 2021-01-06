@@ -2354,7 +2354,7 @@ namespace WindowsForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ConvertTxtToDataSet();
+             
             //设置Timer控件可用
             this.timer1.Enabled = true;
             //设置时间间隔（毫秒为单位）
@@ -4663,7 +4663,7 @@ namespace WindowsForms
             {
                 if (box.Text == "")
                 {
-                    ConvertTxtToDataSet();
+
                     UseTextBoxValue.Text_String = txtString;
 
                     box.Text = InputTextValue();
@@ -4688,51 +4688,6 @@ namespace WindowsForms
 
             }
 
-
-        }
-
-        private void ConvertTxtToDataSet()
-        {
-            string ReadLine;
-
-            string path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "//XmlComListData//";
-            //  path = path + serchName;
-            //string strLocalPath = System.Windows.Forms.Application.StartupPath + "//XmlComListData//";  
-            //  string strLocalPath = "../Debug" + "//XmlComListData//";
-            string serchName = "ConBox_list.txt";
-
-            string fullName = path + "\\" + serchName;
-            if (!File.Exists(fullName))
-            {
-                MessageBox.Show("您要加载的数据文件不存在，请重试！");
-                return;
-            }
-            else
-            {
-                //  string Path = @"..//"+UseTextBoxValue.Text_String+"";
-
-                StreamReader reader = new StreamReader(fullName,
-                                      System.Text.Encoding.GetEncoding("GB2312"));
-                while (reader.Peek() >= 0)
-                {
-                    try
-                    {
-                        ReadLine = reader.ReadLine();
-                        array = ReadLine.Split('\n');
-                        if (array.Length == 0)
-                        {
-                            MessageBox.Show("您选择的导入数据类型有误，请重试！");
-                            return;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-
-                }
-
-            }
 
         }
         private void txt_JSModel_DoubleClick(object sender, EventArgs e)

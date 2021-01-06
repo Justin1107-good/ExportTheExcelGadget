@@ -47,6 +47,9 @@ namespace WindowsForms
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_savedatagridview = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txt_ComboxSaveName = new System.Windows.Forms.TextBox();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_Prame)).BeginInit();
             this.groupBox_Search.SuspendLayout();
@@ -58,7 +61,7 @@ namespace WindowsForms
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(860, 6);
+            this.btnCancel.Location = new System.Drawing.Point(18, 6);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(92, 40);
             this.btnCancel.TabIndex = 7;
@@ -130,7 +133,7 @@ namespace WindowsForms
             this.grid_Prame.Name = "grid_Prame";
             this.grid_Prame.RowHeadersWidth = 51;
             this.grid_Prame.RowTemplate.Height = 27;
-            this.grid_Prame.Size = new System.Drawing.Size(616, 418);
+            this.grid_Prame.Size = new System.Drawing.Size(616, 428);
             this.grid_Prame.TabIndex = 10;
             this.grid_Prame.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.grid_Prame_KeyPress);
             // 
@@ -152,7 +155,12 @@ namespace WindowsForms
             // 
             // groupBox_Search
             // 
+            this.groupBox_Search.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox_Search.Controls.Add(this.btn_search);
+            this.groupBox_Search.Controls.Add(this.txt_ComboxSaveName);
             this.groupBox_Search.Controls.Add(this.comboBox_list);
+            this.groupBox_Search.Controls.Add(this.btn_update);
+            this.groupBox_Search.Controls.Add(this.btn_savedatagridview);
             this.groupBox_Search.Controls.Add(this.button1);
             this.groupBox_Search.Controls.Add(this.dgv_List);
             this.groupBox_Search.Location = new System.Drawing.Point(654, 23);
@@ -168,15 +176,16 @@ namespace WindowsForms
             this.comboBox_list.FormattingEnabled = true;
             this.comboBox_list.Items.AddRange(new object[] {
             "--请选择--"});
-            this.comboBox_list.Location = new System.Drawing.Point(7, 12);
+            this.comboBox_list.Location = new System.Drawing.Point(7, 20);
             this.comboBox_list.Name = "comboBox_list";
-            this.comboBox_list.Size = new System.Drawing.Size(145, 28);
+            this.comboBox_list.Size = new System.Drawing.Size(127, 28);
             this.comboBox_list.TabIndex = 15;
             this.comboBox_list.SelectedIndexChanged += new System.EventHandler(this.comboBox_list_SelectedIndexChanged);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.Enabled = false;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Red;
             this.button1.Location = new System.Drawing.Point(0, 0);
@@ -193,11 +202,11 @@ namespace WindowsForms
             this.dgv_List.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LCode,
             this.CConString});
-            this.dgv_List.Location = new System.Drawing.Point(6, 46);
+            this.dgv_List.Location = new System.Drawing.Point(6, 63);
             this.dgv_List.Name = "dgv_List";
             this.dgv_List.RowHeadersWidth = 51;
             this.dgv_List.RowTemplate.Height = 27;
-            this.dgv_List.Size = new System.Drawing.Size(469, 670);
+            this.dgv_List.Size = new System.Drawing.Size(469, 598);
             this.dgv_List.TabIndex = 0;
             this.dgv_List.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_List_KeyUp);
             // 
@@ -219,7 +228,6 @@ namespace WindowsForms
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btn_savedatagridview);
             this.panel1.Controls.Add(this.btnOK);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -230,23 +238,51 @@ namespace WindowsForms
             // 
             // btn_savedatagridview
             // 
-            this.btn_savedatagridview.Location = new System.Drawing.Point(487, 6);
+            this.btn_savedatagridview.Location = new System.Drawing.Point(328, 667);
             this.btn_savedatagridview.Name = "btn_savedatagridview";
             this.btn_savedatagridview.Size = new System.Drawing.Size(147, 40);
             this.btn_savedatagridview.TabIndex = 15;
-            this.btn_savedatagridview.Text = "保存数据到txt";
+            this.btn_savedatagridview.Text = "保存";
             this.btn_savedatagridview.UseVisualStyleBackColor = true;
             this.btn_savedatagridview.Click += new System.EventHandler(this.btn_savedatagridview_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Gainsboro;
             this.groupBox2.Controls.Add(this.grid_Prame);
-            this.groupBox2.Location = new System.Drawing.Point(12, 278);
+            this.groupBox2.Location = new System.Drawing.Point(12, 268);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(622, 467);
+            this.groupBox2.Size = new System.Drawing.Size(622, 477);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "输入";
+            // 
+            // txt_ComboxSaveName
+            // 
+            this.txt_ComboxSaveName.Location = new System.Drawing.Point(171, 23);
+            this.txt_ComboxSaveName.Name = "txt_ComboxSaveName";
+            this.txt_ComboxSaveName.Size = new System.Drawing.Size(144, 25);
+            this.txt_ComboxSaveName.TabIndex = 16;
+            // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(331, 24);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(75, 23);
+            this.btn_search.TabIndex = 17;
+            this.btn_search.Text = "查询";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // btn_update
+            // 
+            this.btn_update.Location = new System.Drawing.Point(7, 667);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(147, 40);
+            this.btn_update.TabIndex = 15;
+            this.btn_update.Text = "修改";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // InputDialogForm
             // 
@@ -270,6 +306,7 @@ namespace WindowsForms
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_Prame)).EndInit();
             this.groupBox_Search.ResumeLayout(false);
+            this.groupBox_Search.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -298,5 +335,8 @@ namespace WindowsForms
         private System.Windows.Forms.DataGridViewTextBoxColumn LCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn CConString;
         private System.Windows.Forms.ComboBox comboBox_list;
+        private System.Windows.Forms.TextBox txt_ComboxSaveName;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.Button btn_update;
     }
 }

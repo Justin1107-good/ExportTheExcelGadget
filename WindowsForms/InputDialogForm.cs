@@ -127,7 +127,12 @@ namespace WindowsForms
         private void InputDialogForm_Load(object sender, EventArgs e)
         {
             comboBox_list.SelectedIndex = comboBox_list.Items.IndexOf("--请选择--");
-            ConvertTxtToDataSet();
+            if (txt_ComboxSaveName.Text == "" | comboBox_list.SelectedIndex == comboBox_list.Items.IndexOf("--请选择--"))
+            {
+                ConvertTxtToDataSet();
+            }
+
+            // ConvertTxtToDataSet();
             //dgv_List.Rows.Clear();
             //dgv_List.DataSource = douCustoms;
             // dgv_List.ReadOnly = true;
@@ -409,7 +414,6 @@ namespace WindowsForms
         {
             #region MyRegion   
             List<GetStringToBindDataGrid> list = new List<GetStringToBindDataGrid>();
-
             //   string dataXmlPath = subpath + "" + txt_productName.Text.ToUpper() + ".xml";
             if (dataXmlPath != null)
             {
@@ -447,7 +451,11 @@ namespace WindowsForms
             //return list;
             #endregion
         }
-
+        /// <summary>
+        /// 得到xml数据转换后的内容为字符串格式
+        /// </summary>
+        /// <param name="strArr"></param>
+        /// <returns></returns>
         private String GetXmlText(string[] strArr)
         {
             string strAllString = "";
@@ -504,64 +512,64 @@ namespace WindowsForms
         /// <param name="e"></param>
         private void btn_savedatagridview_Click(object sender, EventArgs e)
         {
-
-            if (!string.IsNullOrEmpty((UseTextBoxValue.Text_String)))
+            UseTextBoxValue.Text_String = txt_ComboxSaveName.Text;
+            // string getComBox_Text = txt_ComboxSaveName.Text;
+            if (UseTextBoxValue.Text_String == "" | UseTextBoxValue.Text_String == null | string.IsNullOrEmpty(UseTextBoxValue.Text_String))
             {
-                string nameValue = UseTextBoxValue.Text_String;
-                //List<SaveDatGirdCustom> list = new List<SaveDatGirdCustom>();
-                //DataTable dataTable = GetDgvToTable(grid_Prame);    
-
-                string strBarcodeList = "";//设置一个字符串接受分割开的每一个字符 
-
-                for (int i = 0; i < grid_Prame.Rows.Count; i++)
-                {
-                    String[] arr = new String[] { };
-                    String[] arr1 = new String[] { };
-                    if (this.grid_Prame.Rows[i].Cells["Code"].Value != null && this.grid_Prame.Rows[i].Cells["ConString"].Value != null)
-                    {
-                        //  custom  
-                        string sd = this.grid_Prame.Rows[i].Cells[0].Value + "&" + this.grid_Prame.Rows[i].Cells[1].Value.ToString() + ",";
-                        //  string sd = this.grid_Prame.Rows[i].Cells[0].Value + ",";
-                        // string sd1 = this.grid_Prame.Rows[i].Cells[1].Value.ToString() + ",";
-                        arr = sd.Trim().Split(',');
-                        //  arr1 = sd1.Trim().Split(',');
-                        //custom = new SaveDatGirdCustom { LCode = arr, CConString = arr1 };
-                        //list.Add(custom);
-
-                        for (int v = 0; v < arr.Length; v++)
-                        {
-                            strBarcodeList += arr[v].Replace(",\n", "") + "\r\n";//将分隔开的字符串进行重新组装中间加\r\n回车
-                        }
-                        if (strBarcodeList.Length > 0)
-                            strBarcodeList = strBarcodeList.Remove(strBarcodeList.Length - 1);
-
-                    }
-
-                }
-                List<SaveDatGirdCustom> list = GetStrToList(strBarcodeList);
-                if (list == null)
-                {
-                    MessageBox.Show("要保存的数据为空!");
-                    return;
-                }
-                else
-                {
-                    SaveDataGridViewToXml(list);
-                    WriteXmlData(nameValue);
-                    comboBox_list.Items.Clear();
-                    comboBox_list.SelectedIndex = comboBox_list.Items.IndexOf("--请选择--");
-                    ConvertTxtToDataSet();
-
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("填写您要保存的文件名");
+                MessageBox.Show("请您输入要保存的文件名称");
+                txt_ComboxSaveName.BackColor = Color.Beige;
                 return;
             }
+            if (grid_Prame.Rows.Count <= 1)
+            {
+                MessageBox.Show("您要保存的数据为空");
+                return;
+            }
+            for (int j = 0; j < this.comboBox_list.Items.Count; j++)
+            {
+                if (this.comboBox_list.Items[j].Equals(UseTextBoxValue.Text_String))
+                {
+                    MessageBox.Show("该文件名已存在,如需要修改请选择后修改");
+                    return;
+                }
+
+            }
+            comboBox_list.Items.Clear();
+
+            string strBarcodeList = GetStringData(grid_Prame);
+            List<SaveDatGirdCustom> list = GetStrToList(strBarcodeList);
+            WriteXmlData(UseTextBoxValue.Text_String);
+            SaveDataGridViewToXml(list, UseTextBoxValue.Text_String);
+
+            comboBox_list.Items.Clear();
+            //comboBox_list.SelectedIndex = comboBox_list.Items.IndexOf("--请选择--");
+            // ConvertTxtToDataSet();
+            InputDialogForm_Load(null, null);
+
         }
 
+
+
+        public string GetStringData(DataGridView dataGrid)
+        {
+            string strBarcodeList = "";//设置一个字符串接受分割开的每一个字符   
+            for (int i = 0; i < dgv_List.Rows.Count; i++)
+            {
+                String[] arr = new String[] { };
+                if (this.dgv_List.Rows[i].Cells["LCode"].Value != null && this.dgv_List.Rows[i].Cells["CConString"].Value != null)
+                {
+                    string sd = this.dgv_List.Rows[i].Cells[0].Value + "&" + this.dgv_List.Rows[i].Cells[1].Value.ToString() + ",";
+                    arr = sd.Trim().Split(',');
+                    for (int v = 0; v < arr.Length; v++)
+                    {
+                        strBarcodeList += arr[v].Replace(",\n", "") + "\r\n";//将分隔开的字符串进行重新组装中间加\r\n回车
+                    }
+                    if (strBarcodeList.Length > 0)
+                        strBarcodeList = strBarcodeList.Remove(strBarcodeList.Length - 1);
+                }
+            }
+            return strBarcodeList;
+        }
         /// <summary>
         /// 写入预加载文件名到txt文件
         /// </summary>
@@ -570,7 +578,6 @@ namespace WindowsForms
         {
             try
             {
-
                 string path = AppDomain.CurrentDomain.BaseDirectory.ToString();
                 path = path + "XmlComListData/";
 
@@ -578,13 +585,12 @@ namespace WindowsForms
                 {
                     Directory.CreateDirectory(path);
                 }
-
                 FileStream fs = new FileStream(path + "ConBox_list.txt", FileMode.Append);
-                StreamWriter sw = new StreamWriter(fs);
+                StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));
                 sw.Write("" + strName + "" + "\r\n");
                 sw.Flush();
                 sw.Close();
-                //ConvertTxtToDataSet();
+
             }
             catch
             {
@@ -614,7 +620,7 @@ namespace WindowsForms
                 //  string Path = @"..//"+UseTextBoxValue.Text_String+"";
 
                 StreamReader reader = new StreamReader(fullName,
-                                      System.Text.Encoding.GetEncoding("GB2312"));
+                                      System.Text.Encoding.GetEncoding("utf-8"));
                 while (reader.Peek() >= 0)
                 {
                     try
@@ -636,8 +642,127 @@ namespace WindowsForms
                     }
 
                 }
-                reader.Close();
-                reader.Dispose();
+
+            }
+
+        }
+        /// <summary>
+        /// 查询数据判断是否已存在此名称，存在则替换
+        /// </summary>
+        private void UpdateTxtToDataSet(string updateName)
+        {
+            string ReadLine;
+            string[] array;
+            string strLocalPath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "//XmlComListData//";
+
+            string serchName = "ConBox_list.txt";
+
+            string fullName = strLocalPath + "\\" + serchName;
+            if (!File.Exists(fullName))
+            {
+                MessageBox.Show("您要加载的数据文件不存在，请重试！");
+                return;
+            }
+            else
+            {
+                //  string Path = @"..//"+UseTextBoxValue.Text_String+"";
+
+                StreamReader reader = new StreamReader(fullName,
+                                      System.Text.Encoding.GetEncoding("utf-8"));
+                while (reader.Peek() >= 0)
+                {
+                    try
+                    {
+                        ReadLine = reader.ReadLine();
+                        array = ReadLine.Split('\n');
+                        if (array.Length == 0)
+                        {
+                            MessageBox.Show("您选择的导入数据类型有误，请重试！");
+                            return;
+
+
+                        }
+                        if (updateName.Equals(array[0]))
+                        {
+                            array[0].Replace(array[0], updateName);
+
+                        }
+                        this.comboBox_list.Items.Add(array[0]);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+
+                }
+
+            }
+
+        }
+        // <summary>
+        /// 模糊查询从txt文件中得到文件名，再显示到comboBox上
+        /// </summary>
+        private void ConvertTxtToDataSet(string searchTextName)
+        {
+            string ReadLine;
+            string[] array;
+            string[] array1;
+            string strLocalPath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "//XmlComListData//";
+
+            string serchName = "ConBox_list.txt";
+
+            string fullName = strLocalPath + "\\" + serchName;
+            if (!File.Exists(fullName))
+            {
+                MessageBox.Show("您要加载的数据文件不存在，请重试！");
+                return;
+            }
+            else
+            {
+
+                //  string Path = @"..//"+UseTextBoxValue.Text_String+"";
+
+                StreamReader reader = new StreamReader(fullName,
+                                      System.Text.Encoding.GetEncoding("utf-8"));
+                while (reader.Peek() >= 0)
+                {
+                    try
+                    {
+                        ReadLine = reader.ReadLine();
+
+                        array = ReadLine.Split('\n');
+                        if (array.Length == 0)
+                        {
+                            MessageBox.Show("您选择的导入数据类型有误，请重试！");
+                            return;
+
+                        }
+
+                        if (array[0].Trim().ToString().Contains("" + searchTextName + "%") == true)
+                        {
+                            MessageBox.Show("True");
+                        }
+
+                        if (array[0].Trim().ToString().Contains("%" + searchTextName + "%") == true | array[0].Trim().ToString().Contains("%" + searchTextName + "") == true | array[0].Trim().ToString().Contains("" + searchTextName + "%") == true | array[0].Trim().ToString().Contains("" + searchTextName + "") == true)
+                        {
+                            array1 = array;
+                            comboBox_list.Items.Add(array1[0]);
+                        }
+
+
+
+                        //MessageBox.Show(array[0]);
+                        // comboBox_list.Items.Clear();
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+
+                }
+
             }
 
         }
@@ -645,13 +770,13 @@ namespace WindowsForms
         /// 保存datagridview数据到x'm'l，保存预加载数据信息
         /// </summary>
         /// <param name="columns"></param>
-        public void SaveDataGridViewToXml(List<SaveDatGirdCustom> columns)
+        public void SaveDataGridViewToXml(List<SaveDatGirdCustom> columns, string strName)
         {
             #region 数据记忆保存  
 
-            // string path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "//DataGridViewToXml//";
-            string path = "../Debug" + "//DataGridViewToXml//";
-            string pathString = "DataGridViewToXml/" + UseTextBoxValue.Text_String + ".xml";
+            string path = AppDomain.CurrentDomain.BaseDirectory.ToString() + "//DataGridViewToXml//";
+            // string path = "../Debug" + "//DataGridViewToXml//";
+            string pathString = "DataGridViewToXml/" + strName + ".xml";
 
             if (!Directory.Exists(path))
             {
@@ -665,14 +790,16 @@ namespace WindowsForms
                 XmlSerializer xs = new XmlSerializer(typeof(SaveDatGirdCustom));
                 xs.Serialize(fs, custom);
                 fs.Close();
+                fs.Dispose();
 
 
             }
             MessageBox.Show("保存成功", "提示", MessageBoxButtons.OK);
-
-            columns.Clear();
             comboBox_list.Items.Clear();
             ConvertTxtToDataSet();
+            //  txt_ComboxSaveName.Text = string.Empty;
+            columns.Clear();
+
             #endregion
 
 
@@ -686,9 +813,11 @@ namespace WindowsForms
         /// <param name="e"></param>
         private void comboBox_list_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //dgv_List.Rows.Clear();
+            dgv_List.Rows.Clear();
+            // comboBox_list.Items.Clear();
+            //comboBox_list.SelectedIndex = comboBox_list.Items.IndexOf("--请选择--");
             // MessageBox.Show(comboBox_list.SelectedItem.ToString());
-            if (comboBox_list.SelectedIndex == 0)
+            if (comboBox_list.SelectedItem.ToString() == "--请选择--")
             {
                 return;
             }
@@ -802,6 +931,73 @@ namespace WindowsForms
             }
 
             return list;
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            // comboBox_list.Text = string.Empty;
+            comboBox_list.Items.Clear();
+            dgv_List.Rows.Clear();
+            string getSerch = txt_ComboxSaveName.Text;
+            if (txt_ComboxSaveName.Text != "")
+            {
+                ConvertTxtToDataSet(txt_ComboxSaveName.Text);
+            }
+            else
+            {
+                ConvertTxtToDataSet();
+            }
+
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            UpdateTxtToDataSet(comboBox_list.SelectedItem.ToString());
+            if (!string.IsNullOrEmpty((comboBox_list.SelectedItem.ToString())))
+            {
+                string nameValue = comboBox_list.SelectedItem.ToString();
+                string strBarcodeList = "";//设置一个字符串接受分割开的每一个字符 
+                strBarcodeList = GetStringData(dgv_List);
+                //for (int i = 0; i < grid_Prame.Rows.Count; i++)
+                //{
+                //    String[] arr = new String[] { };
+                //    String[] arr1 = new String[] { };
+                //    if (this.grid_Prame.Rows[i].Cells["Code"].Value != null && this.grid_Prame.Rows[i].Cells["ConString"].Value != null)
+                //    {
+                //        string sd = this.grid_Prame.Rows[i].Cells[0].Value + "&" + this.grid_Prame.Rows[i].Cells[1].Value.ToString() + ",";
+                //        arr = sd.Trim().Split(',');
+                //        for (int v = 0; v < arr.Length; v++)
+                //        {
+                //            strBarcodeList += arr[v].Replace(",\n", "") + "\r\n";//将分隔开的字符串进行重新组装中间加\r\n回车
+                //        }
+                //        if (strBarcodeList.Length > 0)
+                //            strBarcodeList = strBarcodeList.Remove(strBarcodeList.Length - 1);
+
+                //    }
+
+                //}
+                List<SaveDatGirdCustom> list = GetStrToList(strBarcodeList);
+                if (list == null)
+                {
+                    MessageBox.Show("要保存的数据为空!");
+                    return;
+                }
+                else
+                {
+                    SaveDataGridViewToXml(list, nameValue);
+                    WriteXmlData(nameValue);
+                    comboBox_list.Items.Clear();
+                    comboBox_list.SelectedIndex = comboBox_list.Items.IndexOf("--请选择--");
+                    ConvertTxtToDataSet();
+
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("填写您要保存的文件名");
+                return;
+            }
         }
     }
 
