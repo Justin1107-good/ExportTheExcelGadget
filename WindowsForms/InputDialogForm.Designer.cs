@@ -29,6 +29,7 @@ namespace WindowsForms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,23 +40,28 @@ namespace WindowsForms
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox_Search = new System.Windows.Forms.GroupBox();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.txt_ComboxSaveName = new System.Windows.Forms.TextBox();
             this.comboBox_list = new System.Windows.Forms.ComboBox();
+            this.btn_update = new System.Windows.Forms.Button();
+            this.btn_savedatagridview = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dgv_List = new System.Windows.Forms.DataGridView();
             this.LCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CConString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_savedatagridview = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txt_ComboxSaveName = new System.Windows.Forms.TextBox();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.btn_update = new System.Windows.Forms.Button();
+            this.Delete = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_Prame)).BeginInit();
             this.groupBox_Search.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.Delete.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -92,6 +98,7 @@ namespace WindowsForms
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
@@ -100,7 +107,7 @@ namespace WindowsForms
             this.groupBox1.ForeColor = System.Drawing.Color.Red;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(623, 234);
+            this.groupBox1.Size = new System.Drawing.Size(623, 250);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "提示";
@@ -135,6 +142,7 @@ namespace WindowsForms
             this.grid_Prame.RowTemplate.Height = 27;
             this.grid_Prame.Size = new System.Drawing.Size(616, 428);
             this.grid_Prame.TabIndex = 10;
+            this.grid_Prame.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grid_Prame_CellMouseDown);
             this.grid_Prame.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.grid_Prame_KeyPress);
             // 
             // Code
@@ -156,6 +164,7 @@ namespace WindowsForms
             // groupBox_Search
             // 
             this.groupBox_Search.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox_Search.Controls.Add(this.button2);
             this.groupBox_Search.Controls.Add(this.btn_search);
             this.groupBox_Search.Controls.Add(this.txt_ComboxSaveName);
             this.groupBox_Search.Controls.Add(this.comboBox_list);
@@ -168,7 +177,25 @@ namespace WindowsForms
             this.groupBox_Search.Size = new System.Drawing.Size(481, 716);
             this.groupBox_Search.TabIndex = 11;
             this.groupBox_Search.TabStop = false;
+            this.groupBox_Search.Text = "提取";
             this.groupBox_Search.TextChanged += new System.EventHandler(this.groupBox_Search_TextChanged);
+            // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(393, 28);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(75, 28);
+            this.btn_search.TabIndex = 17;
+            this.btn_search.Text = "查询";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // txt_ComboxSaveName
+            // 
+            this.txt_ComboxSaveName.Location = new System.Drawing.Point(234, 28);
+            this.txt_ComboxSaveName.Name = "txt_ComboxSaveName";
+            this.txt_ComboxSaveName.Size = new System.Drawing.Size(144, 25);
+            this.txt_ComboxSaveName.TabIndex = 16;
             // 
             // comboBox_list
             // 
@@ -176,11 +203,31 @@ namespace WindowsForms
             this.comboBox_list.FormattingEnabled = true;
             this.comboBox_list.Items.AddRange(new object[] {
             "--请选择--"});
-            this.comboBox_list.Location = new System.Drawing.Point(7, 20);
+            this.comboBox_list.Location = new System.Drawing.Point(7, 25);
             this.comboBox_list.Name = "comboBox_list";
             this.comboBox_list.Size = new System.Drawing.Size(127, 28);
             this.comboBox_list.TabIndex = 15;
             this.comboBox_list.SelectedIndexChanged += new System.EventHandler(this.comboBox_list_SelectedIndexChanged);
+            // 
+            // btn_update
+            // 
+            this.btn_update.Location = new System.Drawing.Point(7, 670);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(147, 40);
+            this.btn_update.TabIndex = 15;
+            this.btn_update.Text = "修改";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
+            // 
+            // btn_savedatagridview
+            // 
+            this.btn_savedatagridview.Location = new System.Drawing.Point(328, 670);
+            this.btn_savedatagridview.Name = "btn_savedatagridview";
+            this.btn_savedatagridview.Size = new System.Drawing.Size(147, 40);
+            this.btn_savedatagridview.TabIndex = 15;
+            this.btn_savedatagridview.Text = "新建";
+            this.btn_savedatagridview.UseVisualStyleBackColor = true;
+            this.btn_savedatagridview.Click += new System.EventHandler(this.btn_savedatagridview_Click);
             // 
             // button1
             // 
@@ -206,7 +253,7 @@ namespace WindowsForms
             this.dgv_List.Name = "dgv_List";
             this.dgv_List.RowHeadersWidth = 51;
             this.dgv_List.RowTemplate.Height = 27;
-            this.dgv_List.Size = new System.Drawing.Size(469, 598);
+            this.dgv_List.Size = new System.Drawing.Size(469, 601);
             this.dgv_List.TabIndex = 0;
             this.dgv_List.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_List_KeyUp);
             // 
@@ -236,16 +283,6 @@ namespace WindowsForms
             this.panel1.Size = new System.Drawing.Size(1153, 52);
             this.panel1.TabIndex = 12;
             // 
-            // btn_savedatagridview
-            // 
-            this.btn_savedatagridview.Location = new System.Drawing.Point(328, 667);
-            this.btn_savedatagridview.Name = "btn_savedatagridview";
-            this.btn_savedatagridview.Size = new System.Drawing.Size(147, 40);
-            this.btn_savedatagridview.TabIndex = 15;
-            this.btn_savedatagridview.Text = "保存";
-            this.btn_savedatagridview.UseVisualStyleBackColor = true;
-            this.btn_savedatagridview.Click += new System.EventHandler(this.btn_savedatagridview_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Gainsboro;
@@ -257,32 +294,37 @@ namespace WindowsForms
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "输入";
             // 
-            // txt_ComboxSaveName
+            // Delete
             // 
-            this.txt_ComboxSaveName.Location = new System.Drawing.Point(171, 23);
-            this.txt_ComboxSaveName.Name = "txt_ComboxSaveName";
-            this.txt_ComboxSaveName.Size = new System.Drawing.Size(144, 25);
-            this.txt_ComboxSaveName.TabIndex = 16;
+            this.Delete.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.Delete.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.Delete.Name = "Delete";
+            this.Delete.Size = new System.Drawing.Size(127, 28);
             // 
-            // btn_search
+            // deleteToolStripMenuItem
             // 
-            this.btn_search.Location = new System.Drawing.Point(331, 24);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(75, 23);
-            this.btn_search.TabIndex = 17;
-            this.btn_search.Text = "查询";
-            this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
+            this.deleteToolStripMenuItem.Text = "Delete";
             // 
-            // btn_update
+            // button2
             // 
-            this.btn_update.Location = new System.Drawing.Point(7, 667);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(147, 40);
-            this.btn_update.TabIndex = 15;
-            this.btn_update.Text = "修改";
-            this.btn_update.UseVisualStyleBackColor = true;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
+            this.button2.Location = new System.Drawing.Point(142, 26);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 28);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "删除";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(85, 208);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 19);
+            this.label3.TabIndex = 12;
             // 
             // InputDialogForm
             // 
@@ -310,6 +352,7 @@ namespace WindowsForms
             ((System.ComponentModel.ISupportInitialize)(this.dgv_List)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.Delete.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +381,9 @@ namespace WindowsForms
         private System.Windows.Forms.TextBox txt_ComboxSaveName;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.Button btn_update;
+        private System.Windows.Forms.ContextMenuStrip Delete;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
     }
 }

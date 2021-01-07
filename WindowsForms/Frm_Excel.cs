@@ -2273,9 +2273,9 @@ namespace WindowsForms
                 groups.Clear();
                 arrModels.Clear();
                 columns.Clear();
-
-                System.Windows.Forms.MessageBox.Show("错误原因：" + err.Message, "提示信息",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                WriteSQLLog(txt_productName.Text, "错误原因：" + err.Message);
+                //System.Windows.Forms.MessageBox.Show("错误原因：" + err.Message, "提示信息",
+                //     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             finally
             {
@@ -2354,7 +2354,7 @@ namespace WindowsForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-             
+
             //设置Timer控件可用
             this.timer1.Enabled = true;
             //设置时间间隔（毫秒为单位）
