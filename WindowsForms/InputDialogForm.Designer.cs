@@ -30,6 +30,7 @@ namespace WindowsForms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputDialogForm));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -255,6 +256,7 @@ namespace WindowsForms
             this.dgv_List.RowTemplate.Height = 27;
             this.dgv_List.Size = new System.Drawing.Size(469, 601);
             this.dgv_List.TabIndex = 0;
+            this.dgv_List.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_List_CellMouseDown);
             this.dgv_List.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_List_KeyUp);
             // 
             // LCode
@@ -337,6 +339,7 @@ namespace WindowsForms
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "InputDialogForm";

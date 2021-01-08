@@ -32,6 +32,7 @@ namespace WindowsForms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Excel));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label36 = new System.Windows.Forms.Label();
@@ -2216,7 +2217,6 @@ namespace WindowsForms
             this.txt_KeJiaAModel.Size = new System.Drawing.Size(129, 124);
             this.txt_KeJiaAModel.TabIndex = 35;
             this.txt_KeJiaAModel.Click += new System.EventHandler(this.txt_KeJiaAModel_Click);
-           
             this.txt_KeJiaAModel.TextChanged += new System.EventHandler(this.txt_KeJiaAModel_TextChanged);
             this.txt_KeJiaAModel.DoubleClick += new System.EventHandler(this.txt_KeJiaAModel_DoubleClick);
             this.txt_KeJiaAModel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_KeJiaAModel_KeyUp);
@@ -2250,6 +2250,7 @@ namespace WindowsForms
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Excel";
             this.Text = "SkyCore";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

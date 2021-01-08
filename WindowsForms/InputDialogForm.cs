@@ -233,11 +233,11 @@ namespace WindowsForms
         /// <param name="e"></param>
         private void grid_Prame_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Keys keyData = new Keys();
-            if (keyData == (Keys.V | Keys.Control | Keys.Shift))
-            {
-                PasteData();
-            }
+            //Keys keyData = new Keys();
+            //if (keyData == (Keys.V | Keys.Control | Keys.Shift))
+            //{
+            //    PasteData();
+            //}
             //if (e.KeyChar == 22)
             //{
             //    PasteData();
@@ -427,7 +427,7 @@ namespace WindowsForms
                     for (int j = 0; j <= colnum; j++)//将值赋值过去---如果datagridview中没有自动增加列
                     {
                         #region 需要判断单元格是不是只读的，是只读的就不用不赋值
-                        bool iszd = this.grid_Prame.Rows[i + rowStart].Cells[j + columnStart].ReadOnly;
+                        bool iszd = this.dgv_List.Rows[i + rowStart].Cells[j + columnStart].ReadOnly;
                         if (iszd == true)
                         {
                             continue;
@@ -440,7 +440,9 @@ namespace WindowsForms
                             sjz = data[i, j].ToString();
                         }
                         catch { sjz = ""; }
-                        if (sjz.Trim().Length < 1) { continue; }//直接复制this.dataGridView3.Rows[i + rowStart].Cells[j + columnStart].Value = sjz;
+                        if (sjz.Trim().Length < 1) { continue; }
+                        //直接复制
+                        this.dgv_List.Rows[i + rowStart].Cells[j + columnStart].Value = sjz;
                     }
                 }
 
@@ -517,18 +519,72 @@ namespace WindowsForms
             #region excel复制粘贴功能
 
 
-            if (keyData == (Keys.V | Keys.Control | Keys.Shift))  // ctrl+V
+            if (keyData == (Keys.V | Keys.Control | Keys.Shift) && this.dgv_List.SelectedCells.Count > 0 && !this.dgv_List.SelectedCells[0].IsInEditMode)  // ctrl+V
             {
-                bool bd = grid_Prame.Focus();//避免影响到界面上其他功能使用粘贴
-                if (bd == true)
+                try
                 {
-                    IDataObject idataObject = Clipboard.GetDataObject();
-                    string da = Clipboard.GetText();
-                    string[] s = idataObject.GetFormats();
-                    copydata(da);
-                    return true;//很重要，不写将会把所有值填充在最后一个单元格里面
+                    string[] itemRow = Regex.Split(Clipboard.GetText(), Environment.NewLine);  //Excel 的每行以回车键分开            
+                    foreach (var item in itemRow.AsEnumerable().Where((o) => o.Trim().Length > 0))
+                    {
+                        dgv_List.Rows.Add(Regex.Split(Convert.ToString(item), @"\t"));    //每一个单元格以 tab键分开　                
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
 
+
+
+
+                //bool bd = dgv_List.Focus();//避免影响到界面上其他功能使用粘贴
+                //if (bd == true)
+                //{
+                //    IDataObject idataObject = Clipboard.GetDataObject();
+                //    string da = Clipboard.GetText();
+                //    string[] s = idataObject.GetFormats();
+
+                //    if (!s.Any(f => f == "OEMText"))
+                //    {
+                //        if (!s.Any(f => f == "HTML Format"))
+                //        {
+
+                //        }
+                //        else
+                //        {
+                //            da = idataObject.GetData("HTML Format").ToString();//多个单元格
+
+
+                //            copydata(da);
+
+                //            //msg = Message.;
+                //            msg = new Message();
+                //            return base.ProcessCmdKey(ref msg, Keys.Control);
+
+                //        }
+                //    }
+                //    else
+                //        da = idataObject.GetData("OEMText").ToString();//单个单元格,使用系统功能，无需处理
+
+                //    return true;//很重要，不写将会把所有值填充在最后一个单元格里面
+                //}
+
+            }
+
+            if (keyData == (Keys.Control | Keys.Shift | Keys.A) && this.grid_Prame.SelectedCells.Count > 0 && !this.grid_Prame.SelectedCells[0].IsInEditMode)  // ctrl+V
+            {
+                try
+                {
+                    string[] itemRow = Regex.Split(Clipboard.GetText(), Environment.NewLine);  //Excel 的每行以回车键分开            
+                    foreach (var item in itemRow.AsEnumerable().Where((o) => o.Trim().Length > 0))
+                    {
+                        grid_Prame.Rows.Add(Regex.Split(Convert.ToString(item), @"\t"));    //每一个单元格以 tab键分开　                
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             #endregion
             return base.ProcessCmdKey(ref msg, keyData);
@@ -1081,11 +1137,39 @@ namespace WindowsForms
                 else
                 {
 
-                    List<GetStringToBindDataGrid> list = ReadDataXml(fullName);
-                    BindingSource bs = new BindingSource();
-                    bs.DataSource = list;
+                    
                     dgv_List.Rows.Clear();
-                    dgv_List.DataSource = bs;
+                    //BindingSource bs = new BindingSource();
+                    //bs.DataSource = dous;
+                    //grid_Prame.DataSource = bs;   
+
+                    // 指定DataGridView控件显示的列数   
+                    dgv_List.ColumnCount = 2;
+                    //显示列标题   
+                    dgv_List.ColumnHeadersVisible = true;
+                    //设置DataGridView控件标题列的样式   
+                    DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+                    //设置列标题的背景颜色    
+                    columnHeaderStyle.BackColor = Color.Beige;
+                    //设置列标题的字体大小、样式      
+                    columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+                    dgv_List.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+                    //设置DataGridView控件的标题列名    
+                    dgv_List.Columns[0].Name = "LCode";
+                    dgv_List.Columns[1].Name = "CConString";
+                    string[] row1 = null;
+                    List<GetStringToBindDataGrid> list = ReadDataXml(fullName);
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        row1 = new string[] { list[i].LCode, list[i].CConString };
+                        dgv_List.Rows.Add(row1);
+                    }
+
+
+                    //BindingSource bs = new BindingSource();
+                    //bs.DataSource = list;
+                    //dgv_List.Rows.Clear();
+                    //dgv_List.DataSource = bs;
 
                 }
             }
@@ -1230,6 +1314,20 @@ namespace WindowsForms
 
         private void grid_Prame_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            //try
+            //{
+            //    r = e.RowIndex; Icol = e.ColumnIndex;
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
+
+        }
+
+        private void dgv_List_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
             try
             {
                 r = e.RowIndex; Icol = e.ColumnIndex;
@@ -1239,7 +1337,6 @@ namespace WindowsForms
 
                 throw;
             }
-
         }
 
         /// <summary>
